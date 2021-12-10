@@ -1,23 +1,8 @@
-<!doctype html>
+<?php require_once('../../private/initialize.php'); ?>
+<?php $page_title = 'Staff Menu'; ?>
+<?php include(SHARED_PATH . '/staff_header.php'); ?>
 
-<html lang="en">
-  <head>
-    <title>BookerWatch</title>
-    <meta charset="utf-8">
-  </head>
+    <div id="content">
+    </div>
 
-  <body>
-    <header>
-      <h1>Booker Watch Staff Area</h1>
-    </header>
-
-    <navigation>
-      <ul>
-        <li><a href="index.php">Menu</a></li>
-      </ul>
-    </navigation>
-    <footer>
-      &copy; <?php echo date('Y'); ?> Brook Miller
-    </footer>
-  </body>
-</html>
+<?php include(SHARED_PATH . '/staff_footer.php'); ?>
