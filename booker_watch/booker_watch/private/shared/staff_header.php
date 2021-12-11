@@ -8,16 +8,16 @@
     <head>
         <title>BookerWatch - <?php echo $page_title; ?></title>
         <meta charset="utf-8">
-        <link rel="stylesheet" media="all" href="../stylesheets/staff.css" />
+        <link rel="stylesheet" media="all" href="<?php echo url_for('/stylesheets/staff.css'); ?>" />
     </head>
 
     <body>
         <header>
-        <h1>Booker Watch Staff Area</h1>
+        <h1>Booker Watch -- <?php echo $page_title; ?></h1>
         </header>
 
         <navigation>
         <ul>
-            <li><a href="index.php">Menu</a></li>
+            <li><a href="<?php echo url_for('/staff/index.php')?>">Menu</a></li>
         </ul>
         </navigation>
