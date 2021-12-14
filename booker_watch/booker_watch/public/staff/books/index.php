@@ -33,13 +33,13 @@ $books = [
 
             <?php foreach ($books as $book) { ?>
                 <tr>
-                    <td><?php echo $book['ISBN']; ?></td>
-                    <td><?php echo $book['Title']; ?></td>
-                    <td><?php echo $book['PubYear']; ?></td>
-                    <td><?php echo $book['Author']; ?></td>
-                    <td><?php echo $book['Publisher']; ?></td>
+                    <td><?php echo h($book['ISBN']); ?></td>
+                    <td><?php echo h($book['Title']); ?></td>
+                    <td><?php echo h($book['PubYear']); ?></td>
+                    <td><?php echo h($book['Author']); ?></td>
+                    <td><?php echo h($book['Publisher']); ?></td>
                     <td><?php echo $book['visible'] == 1 ? 'true' : 'false'; ?></td>
-                    <td><a class="action" href="<?php echo url_for('/staff/books/show.php?ISBN=' . $book['ISBN']);?>">View</a></td>
+                    <td><a class="action" href="<?php echo url_for('/staff/books/show.php?ISBN=' . h(u($book['ISBN'])));?>">View</a></td>
                     <td><a class="action" href="">Edit</a></td>
                     <td><a class="action" href="">Delete</a></td>
                 </tr>

@@ -30,13 +30,13 @@ $authors = [
 
             <?php foreach ($authors as $author) { ?>
                 <tr>
-                    <td><?php echo $author['ISBN']; ?></td>
-                    <td><?php echo $author['FirstName']; ?></td>
-                    <td><?php echo $author['LastName']; ?></td>
-                    <td><?php echo $author['Gender']; ?></td>
-                    <td><?php echo $author['Nation']; ?></td>
+                    <td><?php echo h($author['ISBN']); ?></td>
+                    <td><?php echo h($author['FirstName']); ?></td>
+                    <td><?php echo h($author['LastName']); ?></td>
+                    <td><?php echo h($author['Gender']); ?></td>
+                    <td><?php echo h($author['Nation']); ?></td>
                     <td><?php echo $author['visible'] == 1 ? 'true' : 'false'; ?></td>
-                    <td><a class="action" href="<?php echo url_for('/staff/authors/show.php?ISBN=' . $author['ISBN']);?>">View</a></td>
+                    <td><a class="action" href="<?php echo url_for('/staff/authors/show.php?ISBN=' . h(u($author['ISBN'])));?>">View</a></td>
                     <td><a class="action" href="">Edit</a></td>
                     <td><a class="action" href="">Delete</a></td>
                 </tr>
