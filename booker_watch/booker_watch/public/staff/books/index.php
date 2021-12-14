@@ -39,7 +39,7 @@ $books = [
                     <td><?php echo $book['Author']; ?></td>
                     <td><?php echo $book['Publisher']; ?></td>
                     <td><?php echo $book['visible'] == 1 ? 'true' : 'false'; ?></td>
-                    <td><a class="action" href="<?php echo url_for('/staff/subjects/show.php?ISBN=' . $book['ISBN']);?>">View</a></td>
+                    <td><a class="action" href="<?php echo url_for('/staff/books/show.php?ISBN=' . $book['ISBN']);?>">View</a></td>
                     <td><a class="action" href="">Edit</a></td>
                     <td><a class="action" href="">Delete</a></td>
                 </tr>

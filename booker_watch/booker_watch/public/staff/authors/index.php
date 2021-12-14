@@ -2,10 +2,10 @@
 
 <?php
 $authors = [
-    ['ISBN' => '1', 'FirstName' => 'string1', 'LastName' => '1999', 'Gender' => 'neutral', 'Nation' => 'Chantilly', 'visible' => '1'],
-    ['ISBN' => '2', 'FirstName' => 'string2', 'LastName' => '1999', 'Gender' => 'neutral', 'Nation' => 'Chantilly', 'visible' => '1'],
-    ['ISBN' => '3', 'FirstName' => 'string3', 'LastName' => '1999', 'Gender' => 'neutral', 'Nation' => 'Chantilly', 'visible' => '1'],
-    ['ISBN' => '4', 'FirstName' => 'string4', 'LastName' => '1999', 'Gender' => 'neutral', 'Nation' => 'Chantilly', 'visible' => '1'],
+    ['ISBN' => '1', 'FirstName' => 'string1', 'LastName' => 'string5', 'Gender' => 'neutral', 'Nation' => 'Chantilly', 'visible' => '1'],
+    ['ISBN' => '2', 'FirstName' => 'string2', 'LastName' => 'string6', 'Gender' => 'neutral', 'Nation' => 'Chantilly', 'visible' => '1'],
+    ['ISBN' => '3', 'FirstName' => 'string3', 'LastName' => 'string7', 'Gender' => 'neutral', 'Nation' => 'Chantilly', 'visible' => '1'],
+    ['ISBN' => '4', 'FirstName' => 'string4', 'LastName' => 'string8', 'Gender' => 'neutral', 'Nation' => 'Chantilly', 'visible' => '1'],
 ];
 ?>
 <?php $page_title = 'Authors'; ?>
