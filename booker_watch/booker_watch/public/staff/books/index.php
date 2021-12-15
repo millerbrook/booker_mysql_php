@@ -41,7 +41,7 @@ $books = [
                     <td><?php echo h($book['Publisher']); ?></td>
                     <td><?php echo $book['visible'] == 1 ? 'true' : 'false'; ?></td>
                     <td><a class="action" href="<?php echo url_for('/staff/books/show.php?ISBN=' . h(u($book['ISBN'])));?>">View</a></td>
-                    <td><a class="action" href="">Edit</a></td>
+                    <td><a class="action" href="<?php echo url_for('/staff/books/edit.php?ISBN=' . h(u($book['ISBN'])));?>">Edit</a></td>
                     <td><a class="action" href="">Delete</a></td>
                 </tr>
             <?php } ?>

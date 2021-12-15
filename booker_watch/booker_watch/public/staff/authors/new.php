@@ -23,7 +23,7 @@ if ($test == '404') {
     <div class="subject new">
         <h1>Create New Author Entry</h1>
 
-        <form action="" method="post">
+        <form action="<?php echo url_for('/staff/authors/create.php'); ?>" method="post">
             <dl>
                 <dt>Associated ISBN</dt>
                 <dd><input type="text" name="ISBN" value="" /></dd>
