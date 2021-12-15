@@ -14,8 +14,9 @@ $books = [
 <div id="content">
     <div class="subjects listing">
         <h1>Books</h1>
+
         <div class="actions">
-            <a class="action" href="">Add New Book Entry</a>
+            <a class="action" href="<?php url_for('/staff/books/new.php')?>">Add New Book Entry</a>
         </div>
 
         <table class="list">

@@ -60,7 +60,7 @@ if ($test == '404') {
                 </dd>
             </dl>
             <div id="operations">
-                <input type="submit" value="Create Author Entry" />
+                <input type="submit" value="Create New Book Entry" />
             </div>
         </form>
 
