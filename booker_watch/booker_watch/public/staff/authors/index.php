@@ -16,7 +16,7 @@ $authors = [
         <h1>Books</h1>
 
         <div class="actions">
-            <a class="action" href="<?php url_for('/staff/authors/new.php')?>" >Create New Author Entry</a>
+            <a class="action" href="<?php echo url_for('/staff/authors/new.php')?>" >Create New Author Entry</a>
         </div>
 
         <table class="list">
