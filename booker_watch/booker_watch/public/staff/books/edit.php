@@ -44,32 +44,32 @@ if(is_post_request()) {
 
         <form action="<?php echo url_for('/staff/books/edit.php?ISBN=' . h(u($ISBN))); ?>" method="post">
         <!-- DECIDE: MAKE ISBN EDITABLE? IT IS THE PRIMARY KEY -->  
-        <!-- <dl>
+        <dl>
                 <dt>ISBN</dt>
-                <dd><input type="text" name="ISBN" value="" /></dd>
-            </dl> -->
+                <dd><input type="text" name="ISBN" value="<?php echo $ISBN;?>" /></dd>
+            </dl>
             <dl>
                 <dt>Title</dt>
                 <dd>
-                    <input type="text" name="Title" value="" />
+                    <input type="text" name="Title" value="<?php echo $Title; ?>" />
                 </dd>
             </dl>
             <dl>
                 <dt>Publication Year</dt>
                 <dd>
-                    <input type="number" name="PubYear" min="1968" max="<?php echo date('Y'); ?>" step="1" value="<?php echo date('Y'); ?>" />
+                    <input type="number" name="PubYear" min="1968" max="<?php echo date('Y'); ?>" value= "<?php echo $PubYear; ?>" step="1"; />
                 </dd>
             </dl>
             <dl>
                 <dt>Author</dt>
                 <dd>
-                    <input type="text" name="Author" value="" />
+                    <input type="text" name="Author" value="<?php echo $Author; ?>" />
                 </dd>
             </dl>
             <dl>
                 <dt>Publisher</dt>
                 <dd>
-                    <input type="text" name="Publisher" value="" />
+                    <input type="text" name="Publisher" value="<?php echo $Publisher;?>" />
                 </dd>
             </dl>
             <dl>

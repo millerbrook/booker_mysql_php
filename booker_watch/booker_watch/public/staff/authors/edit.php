@@ -49,38 +49,38 @@ if(is_post_request()) {
 
         <form action="<?php echo url_for('/staff/authors/edit.php?ISBN=' . h(u($ISBN))); ?>" method="post">
             <!-- DECIDE: MAKE ISBN EDITABLE? IT IS THE PRIMARY KEY -->
-            <!-- <dl>
+            <dl>
                 <dt>Associated ISBN</dt>
-                <dd><input type="text" name="ISBN" value="" /></dd>
-            </dl>-->
+                <dd><input type="text" name="ISBN" value="<?php echo $ISBN;?>" /></dd>
+            </dl>
             <dl> 
                 <dt>First Name</dt>
                 <dd>
-                    <input type="text" name="FirstName" value="" />
+                    <input type="text" name="FirstName" value="<?php echo $FirstName;?>" />
                 </dd>
             </dl>
             <dl>
                 <dt>Last Name</dt>
                 <dd>
-                    <input type="text" name="LastName" value="" />
+                    <input type="text" name="LastName" value="<?php echo $LastName;?>" />
                 </dd>
             </dl>
             <dl>
                 <dt>Gender</dt>
                 <dd>
-                    <input type="text" name="Gender" value="" />
+                    <input type="text" name="Gender" value="<?php echo $Gender; ?>" />
                 </dd>
             </dl>
             <dl>
                 <dt>Nation</dt>
                 <dd>
-                    <input type="text" name="Nation" value="" />
+                    <input type="text" name="Nation" value="<?php echo $Nation; ?>" />
                 </dd>
             </dl>
             <dl>
                 <dt>Birthdate</dt>
                 <dd>
-                    <input type="date" name="BirthDate" value="" />
+                    <input type="date" name="BirthDate" value="<?php echo $Birthdate;?>" />
                 </dd>
             </dl>
             <dl>
