@@ -13,7 +13,7 @@ $authors = [
 
 <div id="content">
     <div class="subjects listing">
-        <h1>Books</h1>
+        <h1>Authors</h1>
 
         <div class="actions">
             <a class="action" href="<?php echo url_for('/staff/authors/new.php')?>" >Create New Author Entry</a>

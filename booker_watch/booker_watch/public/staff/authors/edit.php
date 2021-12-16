@@ -2,14 +2,39 @@
 
 require_once('../../../private/initialize.php');
 
-$test = $_GET['test'] ?? '';
-
-if ($test == '404') {
-    error_404();
-} elseif ($test == '500') {
-    error_500();
-} elseif ($test == 'redirect') {
+if(!isset($_GET['ISBN'])) {
     redirect_to(url_for('/staff/authors/index.php'));
+}
+
+$ISBN = $_GET['ISBN'];
+$FirstName = '';
+$LastName = '';
+$Gender = '';
+$Nation = '';
+$Birthdate = '';
+$visible = '';
+
+if(is_post_request()) {
+
+    // Handle form values sent by edit.php below
+
+    $FirstName = $_POST['FirstName'] ?? '';
+    $LastName = $_POST['LastName'] ?? '';
+    $Gender = $_POST['Gender'] ?? '';
+    $Nation = $_POST['Nation'] ?? '';
+    $Birthdate = $_POST['Birthdate'] ?? '';
+    $visible = $_POST['visible'] ?? '';
+
+    echo "Form parameters<br />";
+    echo "ISBN: " . $ISBN . "<br />";
+    echo "Name: " . $FirstName . " " . $LastName . "<br />";
+    echo "Gender: " . $Gender . "<br />";
+    echo "Nation: " . $Nation . "<br />";
+    echo "Birth Date: " . $Birthdate . "<br />";
+    echo "Visible: " . $visible . "<br />";
+
+} else {
+   // 
 }
 ?>
 
@@ -23,7 +48,7 @@ if ($test == '404') {
     <div class="subject new">
         <h1>Edit Author Entry</h1>
 
-        <form action="" method="post">
+        <form action="<?php echo url_for('/staff/authors/edit.php?ISBN=' . h(u($ISBN))); ?>" method="post">
             <dl>
                 <dt>Associated ISBN</dt>
                 <dd><input type="text" name="ISBN" value="" /></dd>
