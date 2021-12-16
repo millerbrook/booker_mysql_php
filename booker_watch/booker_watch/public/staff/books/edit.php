@@ -2,15 +2,34 @@
 
 require_once('../../../private/initialize.php');
 
-$test = $_GET['test'] ?? '';
-
-if ($test == '404') {
-    error_404();
-} elseif ($test == '500') {
-    error_500();
-} elseif ($test == 'redirect') {
+if(!isset($_GET['ISBN'])) {
     redirect_to(url_for('/staff/books/index.php'));
 }
+
+$ISBN = $_GET['ISBN'];
+$PubYear = '';
+$Author = '';
+$Publisher = '';
+$visible = '';
+
+if(is_post_request()) {
+
+    // Handle form values sent by edit.php below
+    $Title = $_POST['Title'] ?? '';
+    $PubYear = $_POST['PubYear'] ?? '';
+    $Author = $_POST['Author'] ?? '';
+    $Publisher = $_POST['Publisher'] ?? '';
+    $visible = $_POST['visible'] ?? '';
+
+    echo "Form parameters<br />";
+    echo "ISBN: " . $ISBN . "<br />";
+    echo "Title: " . $Title . "<br />";
+    echo "Publication Year: " . $PubYear . "<br />";
+    echo "Author: " . $Author . "<br />";
+    echo "Publisher: " . $Publisher . "<br />";
+    echo "Visible: " . $visible . "<br />";
+} 
+
 ?>
 
 <?php $page_title = 'Edit Book Entry'; ?>
@@ -23,11 +42,12 @@ if ($test == '404') {
     <div class="subject edit">
         <h1>Edit Book Entry</h1>
 
-        <form action="" method="post">
-            <dl>
+        <form action="<?php echo url_for('/staff/books/edit.php?ISBN=' . h(u($ISBN))); ?>" method="post">
+        <!-- DECIDE: MAKE ISBN EDITABLE? IT IS THE PRIMARY KEY -->  
+        <!-- <dl>
                 <dt>ISBN</dt>
                 <dd><input type="text" name="ISBN" value="" /></dd>
-            </dl>
+            </dl> -->
             <dl>
                 <dt>Title</dt>
                 <dd>

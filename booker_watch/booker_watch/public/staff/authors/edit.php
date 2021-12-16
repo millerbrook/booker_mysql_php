@@ -17,7 +17,6 @@ $visible = '';
 if(is_post_request()) {
 
     // Handle form values sent by edit.php below
-
     $FirstName = $_POST['FirstName'] ?? '';
     $LastName = $_POST['LastName'] ?? '';
     $Gender = $_POST['Gender'] ?? '';
@@ -49,11 +48,12 @@ if(is_post_request()) {
         <h1>Edit Author Entry</h1>
 
         <form action="<?php echo url_for('/staff/authors/edit.php?ISBN=' . h(u($ISBN))); ?>" method="post">
-            <dl>
+            <!-- DECIDE: MAKE ISBN EDITABLE? IT IS THE PRIMARY KEY -->
+            <!-- <dl>
                 <dt>Associated ISBN</dt>
                 <dd><input type="text" name="ISBN" value="" /></dd>
-            </dl>
-            <dl>
+            </dl>-->
+            <dl> 
                 <dt>First Name</dt>
                 <dd>
                     <input type="text" name="FirstName" value="" />
