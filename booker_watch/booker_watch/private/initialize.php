@@ -20,5 +20,8 @@
   define("WWW_ROOT", $doc_root);
 
   require_once('functions.php');
+  require_once('database.php');
+
+  $db = db_connect;
 
 ?>

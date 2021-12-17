@@ -76,7 +76,7 @@ if(is_post_request()) {
                 <dt>Visible</dt>
                 <dd>
                     <input type="hidden" name="visible" value="0" />
-                    <input type="checkbox" name="visible" value="1" />
+                    <input type="checkbox" name="visible" value="1" <?php if($visible=="1") { echo " checked";} ?>/>
                 </dd>
             </dl>
             <div id="operations">
