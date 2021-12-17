@@ -2,15 +2,25 @@
 
 require_once('../../../private/initialize.php');
 
-$test = $_GET['test'] ?? '';
+if(is_post_request()) {
 
-if ($test == '404') {
-    error_404();
-} elseif ($test == '500') {
-    error_500();
-} elseif ($test == 'redirect') {
-    redirect_to(url_for('/staff/books/index.php'));
-}
+    // Handle form values sent by new.php
+    $ISBN = $_POST['ISBN'] ?? '';
+    $Title = $_POST['Title'] ?? '';
+    $PubYear = $_POST['PubYear'] ?? '';
+    $Author = $_POST['Author'] ?? '';
+    $Publisher = $_POST['Publisher'] ?? '';
+    $visible = $_POST['visible'] ?? '';
+
+    echo "Form parameters<br />";
+    echo "ISBN: " . $ISBN . "<br />";
+    echo "Title: <strong>" . $Title . "</strong><br />";
+    echo "Publication Year: " . $PubYear . "<br />";
+    echo "Author: " . $Author . "<br />";
+    echo "Publisher: " . $Publisher . "<br />";
+    echo "Visible: " . $visible . "<br />";
+
+} else {
 ?>
 
 <?php $page_title = 'Create Book Entry'; ?>
@@ -23,7 +33,7 @@ if ($test == '404') {
     <div class="subject new">
         <h1>Create New Book Entry</h1>
 
-        <form action="<?php echo url_for('/staff/books/create.php'); ?>" method="post">
+        <form action="<?php echo url_for('/staff/books/new.php'); ?>" method="post"> <!--sends back to same page-->
             <dl>
                 <dt>ISBN</dt>
                 <dd><input type="text" name="ISBN" value="" /></dd>
@@ -69,3 +79,4 @@ if ($test == '404') {
 </div>
 
 <?php include(SHARED_PATH . '/staff_footer.php'); ?>
+<?php } //Closes else clause from above (all form stuff is in 'else' clause) ?> 

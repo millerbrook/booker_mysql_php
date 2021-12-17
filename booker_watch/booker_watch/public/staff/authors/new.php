@@ -1,16 +1,28 @@
 <?php
-
+//PROBLEM LIST: 1. dates not working; 
 require_once('../../../private/initialize.php');
 
-$test = $_GET['test'] ?? '';
+if(is_post_request()) {
 
-if ($test == '404') {
-    error_404();
-} elseif ($test == '500') {
-    error_500();
-} elseif ($test == 'redirect') {
-    redirect_to(url_for('/staff/authors/index.php'));
-}
+    // Handle form values sent by new.php
+    $formattedBirthdate = strtotime($_POST['Birthdate']);
+    $ISBN = $_POST['ISBN'] ?? '';
+    $FirstName = $_POST['FirstName'] ?? '';
+    $LastName = $_POST['LastName'] ?? '';
+    $Gender = $_POST['Gender'] ?? '';
+    $Nation = $_POST['Nation'] ?? '';
+    $Birthdate = date('d-m-Y', $formattedBirthdate) ?? ''; //doesn't work
+    $visible = $_POST['visible'] ?? '';
+
+    echo "Form parameters<br />";
+    echo "ISBN: " . $ISBN . "<br />";
+    echo "Name: " . $FirstName . " " . $LastName . "<br />";
+    echo "Gender: " . $Gender . "<br />";
+    echo "Nation: " . $Nation . "<br />";
+    echo "Birth Date: " . $Birthdate . "<br />"; //Problem here -- doesn't print date
+    echo "Visible: " . $visible . "<br />";
+
+} else {
 ?>
 
 <?php $page_title = 'Create Author Entry'; ?>
@@ -23,7 +35,7 @@ if ($test == '404') {
     <div class="subject new">
         <h1>Create New Author Entry</h1>
 
-        <form action="<?php echo url_for('/staff/authors/create.php'); ?>" method="post">
+        <form action="<?php echo url_for('/staff/authors/new.php'); ?>" method="post"><!--sends back to same page-->
             <dl>
                 <dt>Associated ISBN</dt>
                 <dd><input type="text" name="ISBN" value="" /></dd>
@@ -73,5 +85,5 @@ if ($test == '404') {
     </div>
 
 </div>
-
 <?php include(SHARED_PATH . '/staff_footer.php'); ?>
+<?php } //Closes else clause from above (all form stuff is in 'else' clause) ?> 
