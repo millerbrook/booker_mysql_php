@@ -1,12 +1,8 @@
 <?php require_once('../../../private/initialize.php'); ?>
 
 <?php
-$authors = [
-    ['ISBN' => '1', 'FirstName' => 'string1', 'LastName' => 'string5', 'Gender' => 'neutral', 'Nation' => 'Chantilly', 'visible' => '1'],
-    ['ISBN' => '2', 'FirstName' => 'string2', 'LastName' => 'string6', 'Gender' => 'neutral', 'Nation' => 'Chantilly', 'visible' => '1'],
-    ['ISBN' => '3', 'FirstName' => 'string3', 'LastName' => 'string7', 'Gender' => 'neutral', 'Nation' => 'Chantilly', 'visible' => '1'],
-    ['ISBN' => '4', 'FirstName' => 'string4', 'LastName' => 'string8', 'Gender' => 'neutral', 'Nation' => 'Chantilly', 'visible' => '1'],
-];
+$author_set = find_all_authors();
+
 ?>
 <?php $page_title = 'Authors'; ?>
 <?php include(SHARED_PATH . '/staff_header.php'); ?>
@@ -26,20 +22,18 @@ $authors = [
                 <th>Last Name</th>
                 <th>Gender</th>
                 <th>Nation</th>
-                <th>Visible?</th>
                 <th>&nbsp;</th>
                 <th>&nbsp;</th>
                 <th>&nbsp;</th>
             </tr>
 
-            <?php foreach ($authors as $author) { ?>
+            <?php while($author = mysqli_fetch_assoc($author_set)) { ?>
                 <tr>
                     <td><?php echo h($author['ISBN']); ?></td>
                     <td><?php echo h($author['FirstName']); ?></td>
                     <td><?php echo h($author['LastName']); ?></td>
                     <td><?php echo h($author['Gender']); ?></td>
                     <td><?php echo h($author['Nation']); ?></td>
-                    <td><?php echo $author['visible'] == 1 ? 'true' : 'false'; ?></td>
                     <td><a class="action" href="<?php echo url_for('/staff/authors/show.php?ISBN=' . h(u($author['ISBN']))); ?>">View</a></td>
                     <td><a class="action" href="<?php echo url_for('/staff/authors/edit.php?ISBN=' . h(u($author['ISBN']))); ?>">Edit</a></td>
                     <td><a class="action" href="">Delete</a></td>
