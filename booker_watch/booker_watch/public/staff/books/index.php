@@ -1,6 +1,7 @@
 <?php require_once('../../../private/initialize.php'); ?>
 
 <?php
+$book_set = find_all_books();
 $books = [
     ['ISBN' => '1', 'Title' => 'string1', 'PubYear' => '1999', 'Author' => 'Belle Tristic', 'Publisher' => 'Big Hatchet', 'ConYear' => '1999', 'visible' => '1'],
     ['ISBN' => '2', 'Title' => 'string2', 'PubYear' => '1999', 'Author' => 'Belle Tristic', 'Publisher' => 'Big Hatchet', 'ConYear' => '1999', 'visible' => '1'],
