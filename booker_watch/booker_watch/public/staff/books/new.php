@@ -2,25 +2,25 @@
 
 require_once('../../../private/initialize.php');
 
-if(is_post_request()) {
+// if(is_post_request()) {
 
-    // Handle form values sent by new.php
-    $ISBN = $_POST['ISBN'] ?? '';
-    $Title = $_POST['Title'] ?? '';
-    $PubYear = $_POST['PubYear'] ?? '';
-    $Author = $_POST['Author'] ?? '';
-    $Publisher = $_POST['Publisher'] ?? '';
-    $visible = $_POST['visible'] ?? '';
+//     // Handle form values sent by new.php
+//     $ISBN = $_POST['ISBN'] ?? '';
+//     $Title = $_POST['Title'] ?? '';
+//     $PubYear = $_POST['PubYear'] ?? '';
+//     $Author = $_POST['Author'] ?? '';
+//     $Publisher = $_POST['Publisher'] ?? '';
+//     $visible = $_POST['visible'] ?? '';
 
-    echo "Form parameters<br />";
-    echo "ISBN: " . $ISBN . "<br />";
-    echo "Title: <strong>" . $Title . "</strong><br />";
-    echo "Publication Year: " . $PubYear . "<br />";
-    echo "Author: " . $Author . "<br />";
-    echo "Publisher: " . $Publisher . "<br />";
-    echo "Visible: " . $visible . "<br />";
+//     echo "Form parameters<br />";
+//     echo "ISBN: " . $ISBN . "<br />";
+//     echo "Title: <strong>" . $Title . "</strong><br />";
+//     echo "Publication Year: " . $PubYear . "<br />";
+//     echo "Author: " . $Author . "<br />";
+//     echo "Publisher: " . $Publisher . "<br />";
+//     echo "Visible: " . $visible . "<br />";
 
-} else {
+// } else {
 ?>
 
 <?php $page_title = 'Create Book Entry'; ?>
@@ -33,7 +33,7 @@ if(is_post_request()) {
     <div class="subject new">
         <h1>Create New Book Entry</h1>
 
-        <form action="<?php echo url_for('/staff/books/new.php'); ?>" method="post"> <!--sends back to same page-->
+        <form action="<?php echo url_for('/staff/books/create.php'); ?>" method="post">
             <dl>
                 <dt>ISBN</dt>
                 <dd><input type="text" name="ISBN" value="" /></dd>
@@ -79,4 +79,4 @@ if(is_post_request()) {
 </div>
 
 <?php include(SHARED_PATH . '/staff_footer.php'); ?>
-<?php } //Closes else clause from above (all form stuff is in 'else' clause) ?> 
+<!-- <?php //Deleted } to close else clause from above (all form stuff is in 'else' clause) ?>  -->

@@ -13,13 +13,23 @@ if(is_post_request()) {
     $Birthdate = $_POST['Birthdate'] ?? '';
     $visible = $_POST['visible'] ?? '';
 
-    echo "Form parameters<br />";
-    echo "ISBN: " . $ISBN . "<br />";
-    echo "Name: " . $FirstName . " " . $LastName . "<br />";
-    echo "Gender: " . $Gender . "<br />";
-    echo "Nation: " . $Nation . "<br />";
-    echo "Birth Date: " . $Birthdate . "<br />";
-    echo "Visible: " . $visible . "<br />";
+    $sql = "INSERT INTO authorinfo ";
+    $sql .= "(ISBN, FirstName, LastName, Gender, Nation) ";
+    $sql .= "VALUES (";
+    $sql .= "'" . $ISBN . "', ";
+    $sql .= "'" . $FirstName . "', ";
+    $sql .= "'" . $LastName . "', ";
+    $sql .= "'" . $Gender . "', ";
+    $sql .= "'" . $Nation . "'";
+    $sql .= ")";
+    $result = mysqli_query($db, $sql);
+    if($result) {
+        redirect_to(url_for('/staff/authors/show.php?=' . $ISBN));
+    } else {
+        $sql .= mysqli_error($db);
+        echo "SQL ERROR";
+        db_disconnect($db);
+    }
 
 } else {
     redirect_to(url_for('/staff/authors/new.php'));

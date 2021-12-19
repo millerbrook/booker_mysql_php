@@ -2,27 +2,27 @@
 //PROBLEM LIST: 1. dates not working; 
 require_once('../../../private/initialize.php');
 
-if(is_post_request()) {
+// if(is_post_request()) {
 
-    // Handle form values sent by new.php
-    $formattedBirthdate = strtotime($_POST['Birthdate']);
-    $ISBN = $_POST['ISBN'] ?? '';
-    $FirstName = $_POST['FirstName'] ?? '';
-    $LastName = $_POST['LastName'] ?? '';
-    $Gender = $_POST['Gender'] ?? '';
-    $Nation = $_POST['Nation'] ?? '';
-    $Birthdate = date('d-m-Y', $formattedBirthdate) ?? ''; //doesn't work
-    $visible = $_POST['visible'] ?? '';
+//     // Handle form values sent by new.php
+//     $formattedBirthdate = strtotime($_POST['Birthdate']);
+//     $ISBN = $_POST['ISBN'] ?? '';
+//     $FirstName = $_POST['FirstName'] ?? '';
+//     $LastName = $_POST['LastName'] ?? '';
+//     $Gender = $_POST['Gender'] ?? '';
+//     $Nation = $_POST['Nation'] ?? '';
+//     $Birthdate = date('d-m-Y', $formattedBirthdate) ?? ''; //doesn't work
+//     $visible = $_POST['visible'] ?? '';
 
-    echo "Form parameters<br />";
-    echo "ISBN: " . $ISBN . "<br />";
-    echo "Name: " . $FirstName . " " . $LastName . "<br />";
-    echo "Gender: " . $Gender . "<br />";
-    echo "Nation: " . $Nation . "<br />";
-    echo "Birth Date: " . $Birthdate . "<br />"; //Problem here -- doesn't print date
-    echo "Visible: " . $visible . "<br />";
+//     echo "Form parameters<br />";
+//     echo "ISBN: " . $ISBN . "<br />";
+//     echo "Name: " . $FirstName . " " . $LastName . "<br />";
+//     echo "Gender: " . $Gender . "<br />";
+//     echo "Nation: " . $Nation . "<br />";
+//     echo "Birth Date: " . $Birthdate . "<br />"; //Problem here -- doesn't print date
+//     echo "Visible: " . $visible . "<br />";
 
-} else {
+// } else {
 ?>
 
 <?php $page_title = 'Create Author Entry'; ?>
@@ -35,7 +35,7 @@ if(is_post_request()) {
     <div class="subject new">
         <h1>Create New Author Entry</h1>
 
-        <form action="<?php echo url_for('/staff/authors/new.php'); ?>" method="post"><!--sends back to same page-->
+        <form action="<?php echo url_for('/staff/authors/create.php'); ?>" method="post"><!--sends back to same page-->
             <dl>
                 <dt>Associated ISBN</dt>
                 <dd><input type="text" name="ISBN" value="" /></dd>
@@ -86,4 +86,4 @@ if(is_post_request()) {
 
 </div>
 <?php include(SHARED_PATH . '/staff_footer.php'); ?>
-<?php } //Closes else clause from above (all form stuff is in 'else' clause) ?> 
+<?php //Deleted { to Close else clause from above (all form stuff is in 'else' clause) ?> 

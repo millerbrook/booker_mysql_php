@@ -8,37 +8,39 @@ $book = find_book_by_ISBN($isbn);
 ?>
 <div id='content'>
     <a class="back-link" href="<?php echo url_for('/staff/books/index.php'); ?>">&laquo; Back to List</a>
+    <div class="attributes">
+        <table>
+            <dl>
+                <dt>ISBN</dt>
+                <dd><?php echo h($book['ISBN']); ?></dd>
+            </dl>
+            <dl>
+                <dt>Title</dt>
+                <dd>
+                    <?php echo h($book['Title']); ?>
+                </dd>
+            </dl>
+            <dl>
+                <dt>Publication Year</dt>
+                <dd>
+                    <?php echo h($book['PubYear']); ?>
+                </dd>
+            </dl>
+            <dl>
+                <dt>Author</dt>
+                <dd>
+                    <?php echo h($book['Author']); ?>
+                </dd>
+            </dl>
+            <dl>
+                <dt>Publisher</dt>
+                <dd>
+                    <?php echo h($book['Publisher']); ?>
+                </dd>
+            </dl>
+        </table>
+    </div>
 
-    <table>
-        <dl>
-            <dt>ISBN</dt>
-            <dd><?php echo h($book['ISBN']); ?></dd>
-        </dl>
-        <dl>
-            <dt>Title</dt>
-            <dd>
-                <?php echo h($book['Title']); ?>
-            </dd>
-        </dl>
-        <dl>
-            <dt>Publication Year</dt>
-            <dd>
-                <?php echo h($book['PubYear']); ?>
-            </dd>
-        </dl>
-        <dl>
-            <dt>Author</dt>
-            <dd>
-                <?php echo h($book['Author']); ?>
-            </dd>
-        </dl>
-        <dl>
-            <dt>Publisher</dt>
-            <dd>
-                <?php echo h($book['Publisher']); ?>
-            </dd>
-        </dl>
-    </table>
 </div>
 
 <?php
