@@ -86,6 +86,24 @@
         }
     }
 
+    function delete_author_by_ISBN($ISBN){
+        global $db;
+
+        $sql = "DELETE FROM subjects ";
+        $sql .= "WHERE ISBN='" . $ISBN . "' ";
+        $sql .= "LIMIT 1";
+        $result = mysqli_query($db, $sql);
+    
+        // For DELETE statements, $result is true/false
+        if($result) {
+          return true;
+        } else {
+          // DELETE failed
+          echo mysqli_error($db);
+          db_disconnect($db);
+          exit;
+        }
+    }
     function confirm_result_set($result_set) {
         if (!$result_set) {
           exit("Database query failed.");
