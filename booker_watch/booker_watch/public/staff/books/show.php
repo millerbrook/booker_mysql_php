@@ -38,14 +38,15 @@ $book = find_book_by_ISBN($isbn);
                     <?php echo h($book['Publisher']); ?>
                 </dd>
             </dl>
+            <dl>
+                <dt>Prize Consideration Year</dt>
+                <dd>
+                    <?php echo h($book['ConYear']); ?>
+                </dd>
+            </dl>
         </table>
     </div>
 
 </div>
-
-<?php
-$isbn = $_GET['ISBN'] ?? 'No ISBN Provided'; // PHP > 7.0
-$book = find_book_by_ISBN($isbn);
-?>
 
 <?php include(SHARED_PATH . "staff_footer.php"); ?>

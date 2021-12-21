@@ -42,7 +42,7 @@ if(is_post_request()) {
             <!-- DECIDE: MAKE ISBN EDITABLE? IT IS THE PRIMARY KEY -->
             <dl>
                 <dt>Associated ISBN</dt>
-                <dd><input type="text" name="ISBN" value="<?php echo $author['ISBN'];?>" /></dd>
+                <dd><input type="text" name="ISBN" value="<?php echo $author['ISBN'];?>" readonly="readonly"/></dd>
             </dl>
             <dl> 
                 <dt>First Name</dt>

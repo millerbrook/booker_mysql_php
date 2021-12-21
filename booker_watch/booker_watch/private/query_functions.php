@@ -21,6 +21,27 @@
         mysqli_free_result($result);
         return $book;
     }
+    function update_book($book) {
+        global $db;
+
+        $sql = "UPDATE identificationinfo SET ";
+        $sql .= "Title='" . $book['Title'] . "',";
+        $sql .= "PubYear='" . $book['PubYear'] . "',";
+        $sql .= "Author='" . $book['Author'] . "',";
+        $sql .= "Publisher='" . $book['Publisher'] . "', ";
+        $sql .= "ConYear='" . $book['Conyear'] . "' ";
+        $sql .= "WHERE ISBN='" . $book['ISBN'] . "' ";
+        $sql .= "LIMIT 1";
+        $result = mysqli_query($db, $sql);
+        //for UPDATE, result is TRUE/FALSE
+        if($result) {
+                return true;
+        } else {
+
+                echo mysqli_error($db);
+                db_disconnect($db);
+        }
+    }
 
     function find_all_authors() {
         global $db;

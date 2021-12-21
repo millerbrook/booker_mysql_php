@@ -15,8 +15,13 @@ if(is_post_request()) {
     $book['PubYear'] = $_POST['PubYear'] ?? '';
     $book['Author'] = $_POST['Author'] ?? '';
     $book['Publisher'] = $_POST['Publisher'] ?? '';
+    $book['ConYear'] = $_POST['ConYear'] ?? '';
+    $book['ISBN'] = $_POST['ISBN'] ?? '';
     //$visible = $_POST['visible'] ?? '';
 
+    $result = update_book($book);
+    //echo $book['PubYear'];
+    redirect_to((url_for('/staff/books/show.php?ISBN=' . $book['ISBN'])));
 } else {
     $book = find_book_by_ISBN($ISBN);
 }
@@ -37,7 +42,7 @@ if(is_post_request()) {
         <!-- DECIDE: MAKE ISBN EDITABLE? IT IS THE PRIMARY KEY -->  
         <dl>
                 <dt>ISBN</dt>
-                <dd><input type="text" name="ISBN" value="<?php echo $book['ISBN'];?>" /></dd>
+                <dd><input type="text" name="ISBN" value="<?php echo $book['ISBN'];?>" readonly="readonly"/></dd>
             </dl>
             <dl>
                 <dt>Title</dt>
@@ -61,6 +66,12 @@ if(is_post_request()) {
                 <dt>Publisher</dt>
                 <dd>
                     <input type="text" name="Publisher" value="<?php echo $book['Publisher'];?>" />
+                </dd>
+            </dl>
+            <dl>
+                <dt>Year of Consideration for Booker</dt>
+                <dd>
+                    <input type="number" name="ConYear" min="1968" max="<?php echo date('Y'); ?>" value= "<?php echo $book['ConYear']; ?>" step="1"; />
                 </dd>
             </dl>
             <!-- <dl>
