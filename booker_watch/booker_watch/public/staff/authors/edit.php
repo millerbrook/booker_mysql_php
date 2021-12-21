@@ -6,34 +6,25 @@ if(!isset($_GET['ISBN'])) {
     redirect_to(url_for('/staff/authors/index.php'));
 }
 
+
 $ISBN = $_GET['ISBN'];
-$FirstName = '';
-$LastName = '';
-$Gender = '';
-$Nation = '';
-$Birthdate = '';
-$visible = '';
 
 if(is_post_request()) {
-
+    $author = [];
     // Handle form values sent by edit.php below
-    $FirstName = $_POST['FirstName'] ?? '';
-    $LastName = $_POST['LastName'] ?? '';
-    $Gender = $_POST['Gender'] ?? '';
-    $Nation = $_POST['Nation'] ?? '';
-    $Birthdate = $_POST['Birthdate'] ?? '';
-    $visible = $_POST['visible'] ?? '';
-
-    echo "Form parameters<br />";
-    echo "ISBN: " . $ISBN . "<br />";
-    echo "Name: " . $FirstName . " " . $LastName . "<br />";
-    echo "Gender: " . $Gender . "<br />";
-    echo "Nation: " . $Nation . "<br />";
-    echo "Birth Date: " . $Birthdate . "<br />";
-    echo "Visible: " . $visible . "<br />";
+    $author['ISBN'] = $_POST['ISBN'] ?? '';
+    $author['FirstName'] = $_POST['FirstName'] ?? '';
+    $author['LastName'] = $_POST['LastName'] ?? '';
+    $author['Gender'] = $_POST['Gender'] ?? '';
+    $author['Nation'] = $_POST['Nation'] ?? '';
+    //$author['Birthdate'] = $_POST['Birthdate'] ?? '';
+    //$visible = $_POST['visible'] ?? '';
+   
+    $result = update_author($author);
+    redirect_to((url_for('/staff/authors/show.php?ISBN=' . $author['ISBN'])));
 
 } else {
-   // 
+    $author = find_author_by_ISBN($ISBN);
 }
 ?>
 
@@ -51,45 +42,45 @@ if(is_post_request()) {
             <!-- DECIDE: MAKE ISBN EDITABLE? IT IS THE PRIMARY KEY -->
             <dl>
                 <dt>Associated ISBN</dt>
-                <dd><input type="text" name="ISBN" value="<?php echo $ISBN;?>" /></dd>
+                <dd><input type="text" name="ISBN" value="<?php echo $author['ISBN'];?>" /></dd>
             </dl>
             <dl> 
                 <dt>First Name</dt>
                 <dd>
-                    <input type="text" name="FirstName" value="<?php echo $FirstName;?>" />
+                    <input type="text" name="FirstName" value="<?php echo $author['FirstName'];?>" />
                 </dd>
             </dl>
             <dl>
                 <dt>Last Name</dt>
                 <dd>
-                    <input type="text" name="LastName" value="<?php echo $LastName;?>" />
+                    <input type="text" name="LastName" value="<?php echo $author['LastName'];?>" />
                 </dd>
             </dl>
             <dl>
                 <dt>Gender</dt>
                 <dd>
-                    <input type="text" name="Gender" value="<?php echo $Gender; ?>" />
+                    <input type="text" name="Gender" value="<?php echo $author['Gender']; ?>" />
                 </dd>
             </dl>
             <dl>
                 <dt>Nation</dt>
                 <dd>
-                    <input type="text" name="Nation" value="<?php echo $Nation; ?>" />
+                    <input type="text" name="Nation" value="<?php echo $author['Nation']; ?>" />
                 </dd>
             </dl>
-            <dl>
+            <!-- <dl>
                 <dt>Birthdate</dt>
                 <dd>
-                    <input type="date" name="BirthDate" value="<?php echo $Birthdate;?>" />
+                    <input type="date" name="BirthDate" value="<?php //echo $author['Birthdate'];?>" />
                 </dd>
-            </dl>
-            <dl>
+            </dl> -->
+            <!-- <dl>
                 <dt>Visible</dt>
                 <dd>
                     <input type="hidden" name="visible" value="0" />
                     <input type="checkbox" name="visible" value="1"<?php if($visible=="1") { echo " checked";} ?> />
                 </dd>
-            </dl>
+            </dl> -->
             <div id="operations">
                 <input type="submit" value="Edit Author Entry" />
             </div>

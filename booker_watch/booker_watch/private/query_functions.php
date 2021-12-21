@@ -44,9 +44,30 @@
         return $author;
     }
 
+    function update_author($author) {
+        global $db;
+
+        $sql = "UPDATE authorinfo SET ";
+        $sql .= "FirstName='" . $author['FirstName'] . "',";
+        $sql .= "LastName='" . $author['LastName'] . "',";
+        $sql .= "Gender='" . $author['Gender'] . "',";
+        $sql .= "Nation='" . $author['Nation'] . "' ";
+        $sql .= "WHERE ISBN='" . $author['ISBN'] . "' ";
+        $sql .= "LIMIT 1";
+        $result = mysqli_query($db, $sql);
+        //for UPDATE, result is TRUE/FALSE
+        if($result) {
+                return true;
+        } else {
+
+                echo mysqli_error($db);
+                db_disconnect($db);
+        }
+    }
+
     function confirm_result_set($result_set) {
         if (!$result_set) {
           exit("Database query failed.");
         }
-      }
+    }
 ?>

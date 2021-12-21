@@ -7,28 +7,19 @@ if(!isset($_GET['ISBN'])) {
 }
 
 $ISBN = $_GET['ISBN'];
-$PubYear = '';
-$Author = '';
-$Publisher = '';
-$visible = '';
 
 if(is_post_request()) {
-
+    $book = [];
     // Handle form values sent by edit.php below
-    $Title = $_POST['Title'] ?? '';
-    $PubYear = $_POST['PubYear'] ?? '';
-    $Author = $_POST['Author'] ?? '';
-    $Publisher = $_POST['Publisher'] ?? '';
-    $visible = $_POST['visible'] ?? '';
+    $book['Title'] = $_POST['Title'] ?? '';
+    $book['PubYear'] = $_POST['PubYear'] ?? '';
+    $book['Author'] = $_POST['Author'] ?? '';
+    $book['Publisher'] = $_POST['Publisher'] ?? '';
+    //$visible = $_POST['visible'] ?? '';
 
-    echo "Form parameters<br />";
-    echo "ISBN: " . $ISBN . "<br />";
-    echo "Title: " . $Title . "<br />";
-    echo "Publication Year: " . $PubYear . "<br />";
-    echo "Author: " . $Author . "<br />";
-    echo "Publisher: " . $Publisher . "<br />";
-    echo "Visible: " . $visible . "<br />";
-} 
+} else {
+    $book = find_book_by_ISBN($ISBN);
+}
 
 ?>
 
@@ -42,43 +33,43 @@ if(is_post_request()) {
     <div class="subject edit">
         <h1>Edit Book Entry</h1>
 
-        <form action="<?php echo url_for('/staff/books/edit.php?ISBN=' . h(u($ISBN))); ?>" method="post">
+        <form action="<?php echo url_for('/staff/books/edit.php?ISBN=' . h(u($book['ISBN']))); ?>" method="post">
         <!-- DECIDE: MAKE ISBN EDITABLE? IT IS THE PRIMARY KEY -->  
         <dl>
                 <dt>ISBN</dt>
-                <dd><input type="text" name="ISBN" value="<?php echo $ISBN;?>" /></dd>
+                <dd><input type="text" name="ISBN" value="<?php echo $book['ISBN'];?>" /></dd>
             </dl>
             <dl>
                 <dt>Title</dt>
                 <dd>
-                    <input type="text" name="Title" value="<?php echo $Title; ?>" />
+                    <input type="text" name="Title" value="<?php echo $book['Title']; ?>" />
                 </dd>
             </dl>
             <dl>
                 <dt>Publication Year</dt>
                 <dd>
-                    <input type="number" name="PubYear" min="1968" max="<?php echo date('Y'); ?>" value= "<?php echo $PubYear; ?>" step="1"; />
+                    <input type="number" name="PubYear" min="1968" max="<?php echo date('Y'); ?>" value= "<?php echo $book['PubYear']; ?>" step="1"; />
                 </dd>
             </dl>
             <dl>
                 <dt>Author</dt>
                 <dd>
-                    <input type="text" name="Author" value="<?php echo $Author; ?>" />
+                    <input type="text" name="Author" value="<?php echo $book['Author']; ?>" />
                 </dd>
             </dl>
             <dl>
                 <dt>Publisher</dt>
                 <dd>
-                    <input type="text" name="Publisher" value="<?php echo $Publisher;?>" />
+                    <input type="text" name="Publisher" value="<?php echo $book['Publisher'];?>" />
                 </dd>
             </dl>
-            <dl>
+            <!-- <dl>
                 <dt>Visible</dt>
                 <dd>
                     <input type="hidden" name="visible" value="0" />
                     <input type="checkbox" name="visible" value="1" <?php if($visible=="1") { echo " checked";} ?>/>
                 </dd>
-            </dl>
+            </dl> -->
             <div id="operations">
                 <input type="submit" value="Edit Book Entry" />
             </div>

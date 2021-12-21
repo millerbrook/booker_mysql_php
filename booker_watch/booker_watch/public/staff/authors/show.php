@@ -13,7 +13,7 @@ $author = find_author_by_ISBN($isbn);
     <div class="attributes">
         <table>
             <dl>
-                <dt>ISBN</dt>
+                <dt>ISBN: </dt>
                 <dd><?php echo h($author['ISBN']); ?></dd>
             </dl>
             <dl>
