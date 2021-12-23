@@ -10,9 +10,9 @@ if(is_post_request()) {
     $LastName = $_POST['LastName'] ?? '';
     $Gender = $_POST['Gender'] ?? '';
     $Nation = $_POST['Nation'] ?? '';
-    $Birthdate = $_POST['Birthdate'] ?? '';
-    $visible = $_POST['visible'] ?? '';
-
+    //$Birthdate = $_POST['Birthdate'] ?? '';
+    //$visible = $_POST['visible'] ?? '';
+   
     $sql = "INSERT INTO authorinfo ";
     $sql .= "(ISBN, FirstName, LastName, Gender, Nation) ";
     $sql .= "VALUES (";
@@ -24,10 +24,9 @@ if(is_post_request()) {
     $sql .= ")";
     $result = mysqli_query($db, $sql);
     if($result) {
-        redirect_to(url_for('/staff/authors/show.php?=' . $ISBN));
+        redirect_to(url_for('/staff/authors/show.php?ISBN=' . $ISBN));
     } else {
-        $sql .= mysqli_error($db);
-        echo "SQL ERROR";
+        echo mysqli_error($db);
         db_disconnect($db);
     }
 

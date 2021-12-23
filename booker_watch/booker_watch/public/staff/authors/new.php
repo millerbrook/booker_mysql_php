@@ -35,7 +35,7 @@ require_once('../../../private/initialize.php');
     <div class="subject new">
         <h1>Create New Author Entry</h1>
 
-        <form action="<?php echo url_for('/staff/authors/create.php'); ?>" method="post"><!--sends back to same page-->
+        <form action="<?php echo url_for('/staff/authors/create.php'); ?>" method="post">
             <dl>
                 <dt>Associated ISBN</dt>
                 <dd><input type="text" name="ISBN" value="" /></dd>
@@ -64,19 +64,19 @@ require_once('../../../private/initialize.php');
                     <input type="text" name="Nation" value="" />
                 </dd>
             </dl>
-            <dl>
+            <!-- <dl>
                 <dt>Birthdate</dt>
                 <dd>
                     <input type="date" name="BirthDate" value="" />
                 </dd>
-            </dl>
-            <dl>
+            </dl> -->
+            <!-- <dl>
                 <dt>Visible</dt>
                 <dd>
                     <input type="hidden" name="visible" value="0" />
-                    <input type="checkbox" name="visible" value="1"<?php if($visible=="1") { echo " checked";} ?> />
+                    <input type="checkbox" name="visible" value="1"<?php // if($visible=="1") { echo " checked";} ?> />
                 </dd>
-            </dl>
+            </dl> -->
             <div id="operations">
                 <input type="submit" value="Create Author Entry" />
             </div>

@@ -36,7 +36,7 @@ $author_set = find_all_authors();
                     <td><?php echo h($author['Nation']); ?></td>
                     <td><a class="action" href="<?php echo url_for('/staff/authors/show.php?ISBN=' . h(u($author['ISBN']))); ?>">View</a></td>
                     <td><a class="action" href="<?php echo url_for('/staff/authors/edit.php?ISBN=' . h(u($author['ISBN']))); ?>">Edit</a></td>
-                    <td><a class="action" href="">Delete</a></td>
+                    <td><a class="action" href="<?php echo url_for('/staff/authors/delete.php?ISBN=' . h(u($author['ISBN']))); ?>">Delete</a></td>
                 </tr>
             <?php } ?>
         </table>

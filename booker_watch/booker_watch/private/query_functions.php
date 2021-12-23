@@ -89,7 +89,7 @@
     function delete_author_by_ISBN($ISBN){
         global $db;
 
-        $sql = "DELETE FROM subjects ";
+        $sql = "DELETE FROM authorinfo ";
         $sql .= "WHERE ISBN='" . $ISBN . "' ";
         $sql .= "LIMIT 1";
         $result = mysqli_query($db, $sql);
@@ -104,6 +104,7 @@
           exit;
         }
     }
+    
     function confirm_result_set($result_set) {
         if (!$result_set) {
           exit("Database query failed.");

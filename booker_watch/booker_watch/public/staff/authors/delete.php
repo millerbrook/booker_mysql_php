@@ -3,7 +3,7 @@
 require_once('../../../private/initialize.php');
 
 if(!isset($_GET['ISBN'])) {
-  redirect_to(url_for('/staff/authors/index.php'));
+    redirect_to(url_for('/staff/authors/index.php'));
 }
 $ISBN = $_GET['ISBN'];
 
@@ -18,7 +18,7 @@ if(is_post_request()) {
 
 ?>
 
-<?php $page_title = 'Delete Subject'; ?>
+<?php $page_title = 'Delete Author'; ?>
 <?php include(SHARED_PATH . '/staff_header.php'); ?>
 
 <div id="content">
@@ -30,9 +30,9 @@ if(is_post_request()) {
     <p>Are you sure you want to delete this author?</p>
     <p class="item"><?php echo h($author['FirstName'] . " " . $author['LastName']); ?></p>
     <p class="item"><?php echo h("Associated ISBN: " . $author['ISBN']); ?></p>
-    <form action="<?php echo url_for('/staff/authors/delete.php?id=' . h(u($author['ISBN']))); ?>" method="post">
+    <form action="<?php echo url_for('/staff/authors/delete.php?ISBN=' . h(u($author['ISBN']))); ?>" method="post">
       <div id="operations">
-        <input type="submit" name="commit" value="Delete Subject" />
+        <input type="submit" name="commit" value="Delete Author" />
       </div>
     </form>
   </div>
