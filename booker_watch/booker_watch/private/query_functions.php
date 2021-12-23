@@ -21,6 +21,19 @@
         mysqli_free_result($result);
         return $book;
     }
+
+    function find_book_details_by_ISBN($ISBN) {
+        global $db;
+
+        $sql = "SELECT * FROM bookinfo ";
+        $sql .= "WHERE ISBN='" . $ISBN . "' ";
+        $sql .= "LIMIT 1";
+        $result = mysqli_query($db, $sql);
+        confirm_result_set($result);
+        $book_details = mysqli_fetch_assoc($result);
+        mysqli_free_result($result);
+        return $book_details;
+    }
     function update_book($book) {
         global $db;
 
@@ -29,7 +42,7 @@
         $sql .= "PubYear='" . $book['PubYear'] . "',";
         $sql .= "Author='" . $book['Author'] . "',";
         $sql .= "Publisher='" . $book['Publisher'] . "', ";
-        $sql .= "ConYear='" . $book['Conyear'] . "' ";
+        $sql .= "ConYear='" . $book['ConYear'] . "' ";
         $sql .= "WHERE ISBN='" . $book['ISBN'] . "' ";
         $sql .= "LIMIT 1";
         $result = mysqli_query($db, $sql);

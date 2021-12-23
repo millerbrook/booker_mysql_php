@@ -5,6 +5,7 @@
 <?php
 $isbn = $_GET['ISBN'] ?? 'No ISBN Provided'; // PHP > 7.0
 $book = find_book_by_ISBN($isbn);
+$book_details = find_book_details_by_ISBN($isbn);
 ?>
 <div id='content'>
     <a class="back-link" href="<?php echo url_for('/staff/books/index.php'); ?>">&laquo; Back to List</a>
@@ -42,6 +43,12 @@ $book = find_book_by_ISBN($isbn);
                 <dt>Prize Consideration Year</dt>
                 <dd>
                     <?php echo h($book['ConYear']); ?>
+                </dd>
+            </dl>
+            <dl>
+                <dt>Genre</dt>
+                <dd>
+                    <?php echo h($book_details['Genre']) . " " . (h($book_details['Genre2'] ?? '')); ?>
                 </dd>
             </dl>
         </table>
