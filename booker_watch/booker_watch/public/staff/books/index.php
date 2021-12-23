@@ -38,7 +38,7 @@ $book_set = find_all_books();
                     <td><?php echo h($book['ConYear']); ?></td>
                     <td><a class="action" href="<?php echo url_for('/staff/books/show.php?ISBN=' . h(u($book['ISBN'])));?>">View</a></td>
                     <td><a class="action" href="<?php echo url_for('/staff/books/edit.php?ISBN=' . h(u($book['ISBN'])));?>">Edit</a></td>
-                    <td><a class="action" href="">Delete</a></td>
+                    <td><a class="action" href="<?php echo url_for('/staff/books/delete.php?ISBN=' . h(u($book['ISBN'])));?>">Delete</a></td>
                 </tr>
             <?php } ?>
         </table>

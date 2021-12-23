@@ -56,6 +56,35 @@
         }
     }
 
+    function delete_book_by_ISBN($ISBN){
+        global $db;
+
+        $sql = "DELETE FROM identificationinfo ";
+        $sql .= "WHERE ISBN='" . $ISBN . "' ";
+        $sql .= "LIMIT 1";
+        $result = mysqli_query($db, $sql);
+    
+        // For DELETE statements, $result is true/false
+        if($result) {
+            $sql = "DELETE FROM bookinfo ";
+            $sql .= "WHERE ISBN='" . $ISBN . "' ";
+            $sql .= "LIMIT 1";
+            $result = mysqli_query($db, $sql);
+            if($result) {
+                return true;
+            } else {
+                echo mysqli_error($db);
+                db_disconnect($db);
+                exit;
+            }
+        } else {
+          // DELETE failed
+          echo mysqli_error($db);
+          db_disconnect($db);
+          exit;
+        }
+    }
+
     function find_all_authors() {
         global $db;
 
