@@ -37,6 +37,10 @@
     function update_book($book) {
         global $db;
 
+        $errors = validate_book($book);
+        if(!empty($errors)) {
+            return $errors;
+        }
         $sql = "UPDATE identificationinfo SET ";
         $sql .= "Title='" . $book['Title'] . "',";
         $sql .= "PubYear='" . $book['PubYear'] . "',";
@@ -58,6 +62,11 @@
 
     function update_book_details($book_details) {
         global $db;
+
+        $errors = validate_book_details($book_details);
+        if(!empty($errors)) {
+            return $errors;
+        }
 
         $sql = "UPDATE bookinfo SET ";
         $sql .= "Genre1='" . $book_details['Genre1'] . "', ";
@@ -161,9 +170,69 @@
         return $author;
     }
 
+    function validate_author($author) {
+
+        $errors = [];
+        
+        // FirstName
+        if(is_blank($author['FirstName'])) {
+          $errors[] = "First name cannot be blank.";
+        }
+        if(!has_length($author['FirstName'], ['min' => 2, 'max' => 255])) {
+          $errors[] = "First name must be between 2 and 255 characters.";
+        }
+      
+        // LastName
+        if(is_blank($author['LastName'])) {
+            $errors[] = "Last name cannot be blank.";
+          }
+          if(!has_length($author['LastName'], ['min' => 2, 'max' => 255])) {
+            $errors[] = "Last name must be between 2 and 255 characters.";
+          }
+
+        //Gender
+        // Gender
+        if(is_blank($author['Gender'])) {
+            $errors[] = "Gender cannot be blank.";
+          }
+          if(!has_length($author['Gender'], ['min' => 2, 'max' => 255])) {
+            $errors[] = "Gender must be between 2 and 255 characters.";
+          }
+
+          // Nation
+        if(is_blank($author['Gender'])) {
+            $errors[] = "Gender cannot be blank.";
+          }
+          if(!has_length($author['Gender'], ['min' => 2, 'max' => 255])) {
+            $errors[] = "Gender must be between 2 and 255 characters.";
+          }
+        // position
+        // Make sure we are working with an integer
+        $postion_int = (int) $subject['position'];
+        if($postion_int <= 0) {
+          $errors[] = "Position must be greater than zero.";
+        }
+        if($postion_int > 999) {
+          $errors[] = "Position must be less than 999.";
+        }
+      
+        // visible
+        // Make sure we are working with a string
+        $visible_str = (string) $subject['visible'];
+        if(!has_inclusion_of($visible_str, ["0","1"])) {
+          $errors[] = "Visible must be true or false.";
+        }
+      
+        return $errors;
+      }
+      
     function update_author($author) {
         global $db;
 
+        $errors = validate_author($author);
+        if(!empty($errors)) {
+            return $errors;
+        }
         $sql = "UPDATE authorinfo SET ";
         $sql .= "FirstName='" . $author['FirstName'] . "',";
         $sql .= "LastName='" . $author['LastName'] . "',";
