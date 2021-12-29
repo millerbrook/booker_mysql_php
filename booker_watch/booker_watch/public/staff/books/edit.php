@@ -22,6 +22,7 @@ if(is_post_request()) {
     $result = update_book($book);
 
     $book_details = [];
+    $book_details['ISBN'] = $book['ISBN'];
     $book_details['Genre1'] = $_POST['Genre1'] ?? '';
     $book_details['Genre2'] = $_POST['Genre2'] ?? '';
     $book_details['Genre3'] = $_POST['Genre3'] ?? '';
@@ -61,9 +62,8 @@ if(is_post_request()) {
     $book_details['TechniqueOther'] = $_POST['TechniqueOther'] ?? '';
     $book_details['Adaptations'] = $_POST['Adaptations'] ?? '';
 
-    $result_details = update_book_details($book);
-    //echo $book['PubYear'];
-    redirect_to((url_for('/staff/books/show.php?ISBN=' . $book['ISBN'])));
+    $result_details = update_book_details($book_details);
+    //redirect_to((url_for('/staff/books/show.php?ISBN=' . $book['ISBN'])));
 } else {
     $book = find_book_by_ISBN($ISBN);
     $book_details = find_book_details_by_ISBN($ISBN);

@@ -220,7 +220,7 @@ require_once('../../../private/initialize.php');
                 </dd>
             </dl>
             <dl>
-                <dt>Does the plot involve non-chronologically (YES if it is non-linear timewise)</dt>
+                <dt>Does the plot involve non-linear plotting? (YES if it is non-linear timewise)</dt>
                 <dd>
                     <input type="radio" name="PlotTimeNonLinear" value="1">Yes</input>
                     <input type="radio" name="PlotTimeNonLinear" value="0">No</input>

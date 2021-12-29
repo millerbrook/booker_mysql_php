@@ -103,7 +103,7 @@
         $result = mysqli_query($db, $sql);
         
         if($result) { //inner loop checking sql insert into bookinfo table
-            redirect_to(url_for('/staff/books/show.php?=' . $book_details['ISBN']));
+            redirect_to(url_for('/staff/books/show.php?ISBN=' . $book_details['ISBN']));
         } else {
             echo mysqli_error($db);
             db_disconnect($db);
