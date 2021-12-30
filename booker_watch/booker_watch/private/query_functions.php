@@ -194,6 +194,128 @@ function validate_book($book){
       if($number_pages_int < 0) {
           $errors[] = "Value must not be negative.";
         }
+ 
+      //Did the plot occur in London?
+      $london_str = (string) $book_details['PlotInLondon'];
+      if(!has_inclusion_of($london_str, ["0","1"])) {
+        $errors[] = "Designation must be true or false.";
+      }
+
+      //Did the plot occur in England?
+      $england_str = (string) $book_details['PlotInEngland'];
+      if(!has_inclusion_of($england_str, ["0","1"])) {
+        $errors[] = "Designation must be true or false.";
+      }
+
+      //Did the plot occur in former colonies?
+      $colony_str = (string) $book_details['PlotInFrmrColonies'];
+      if(!has_inclusion_of($colony_str, ["0","1"])) {
+        $errors[] = "Designation must be true or false.";
+      }
+
+      //Did plot occur in Ireland?
+      $ireland_str = (string) $book_details['PlotInIreland'];
+      if(!has_inclusion_of($ireland_str, ["0","1"])) {
+        $errors[] = "Designation must be true or false.";
+      }
+
+      //is the plot transnational?
+      $transnational_str = (string) $book_details['PlotTransnational'];
+      if(!has_inclusion_of($transnational_str, ["0","1"])) {
+        $errors[] = "Designation must be true or false.";
+      }
+
+      //Did the plot involve war?
+      $war_str = (string) $book_details['PlotWar'];
+      if(!has_inclusion_of($war_str, ["0","1"])) {
+        $errors[] = "Designation must be true or false.";
+      }
+
+      //Plot timespan (years)
+        $time_span_int = (int) $book_details['PlotTimespan'];
+        if($time_span_int < 0) {
+          $errors[] = "Value must not be negative.";
+        }
+
+      //Plot era begins
+      $era_start_int = (int) $book_details['PlotEraBegins'];
+      if($era_start_int < 0) {
+        $errors[] = "Value must not be negative.";
+      }
+
+      //Plot era ends
+      $era_end_int = (int) $book_details['PlotEraEnds'];
+      if($era_end_int < 0) {
+        $errors[] = "Value must not be negative.";
+      }
+
+      //Nonlinear plat?
+      $non_linear_str = (string) $book_details['PlotTimeNonLinear'];
+      if(!has_inclusion_of($non_linear_str, ["0","1"])) {
+        $errors[] = "Designation must be true or false.";
+      }
+
+      //Did the plot include prolepsis?
+      $prolepsis_str = (string) $book_details['PlotWar'];
+      if(!has_inclusion_of($prolepsis_str, ["0","1"])) {
+        $errors[] = "Designation must be true or false.";
+      }
+
+      // Narrator Type Primary
+      if (is_blank($book_details['NarratorType'])) {
+        $errors[] = "Narrator type cannot be blank.";
+      }
+      if (!has_length($book_details['NarratorType'], ['min' => 1, 'max' => 255])) {
+        $errors[] = "Narrator type must be between 1 and 255 characters.";
+      }
+
+      //Bildungsroman?
+      $bildung_str  = (string) $book_details['ThemeBildung'];
+      if(!has_inclusion_of($bildung_str, ["0","1"])) {
+        $errors[] = "Designation must be true or false.";
+      }
+      //Gender theme?
+      $gender_str  = (string) $book_details['ThemeGender'];
+      if(!has_inclusion_of($gender_str, ["0","1"])) {
+        $errors[] = "Designation must be true or false.";
+      }
+
+      //Race theme?
+      $race_str  = (string) $book_details['ThemeRace'];
+      if(!has_inclusion_of($race_str, ["0","1"])) {
+        $errors[] = "Designation must be true or false.";
+      }
+
+      //Class theme?
+      $class_str  = (string) $book_details['ThemeClass'];
+      if(!has_inclusion_of($class_str, ["0","1"])) {
+        $errors[] = "Designation must be true or false.";
+      }
+
+      //Empire theme?
+      $empire_str  = (string) $book_details['ThemeEmpire'];
+      if(!has_inclusion_of($empire_str, ["0","1"])) {
+        $errors[] = "Designation must be true or false.";
+      }
+
+      //Postcolonial theme?
+      $postcolonial_str  = (string) $book_details['ThemePostColony'];
+      if(!has_inclusion_of($postcolonial_str, ["0","1"])) {
+        $errors[] = "Designation must be true or false.";
+      }
+
+      //Female protagonist?
+      $protagonist_str  = (string) $book_details['ProtagonistFemale'];
+      if(!has_inclusion_of($protagonist_str, ["0","1"])) {
+        $errors[] = "Designation must be true or false.";
+      }
+
+      //Metafiction technique?
+      $metafiction_str  = (string) $book_details['TechniqueMetafiction'];
+      if(!has_inclusion_of($metafiction_str, ["0","1"])) {
+        $errors[] = "Designation must be true or false.";
+      }
+
       return $errors;
 }
 function update_book_details($book_details) {

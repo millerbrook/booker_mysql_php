@@ -7,3 +7,6 @@
 - change Gender radio to simple text entry -- add autocorrection for case with male and female?
 - super weird db design. need to give authors an id number and add field to identification info as foreign key
 - use ![WorldCat API](https://www.oclc.org/developer/api/oclc-apis/worldcat-search-api.en.html) to iteratively grab numbers of books
+- get rid of 'subsequent longlist' -- requires going back every year to update, and it can be calculated based on 'is this first longlist' question
+- change query_functions.php validations of isbn to use has_isbn function in validation_functions.php
+- validation messages need associative array and placement near form entry boxes, plus a listing at top of variables that threw errors
