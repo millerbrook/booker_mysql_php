@@ -34,6 +34,50 @@
         mysqli_free_result($result);
         return $book_details;
     }
+
+    function validate_book($book) {
+      $errors = [];
+      
+      //ISBN
+      if (!preg_match('/^(?=(?:\D*\d){10}(?:(?:\D*\d){3})?$)[\d-]+$/gm', $book['ISBN'])) {
+        $errors[] = "Please enter a valid ISBN";
+    }
+     
+      // Title
+      if(is_blank($book['Title'])) {
+        $errors[] = "Title cannot be blank.";
+      }
+      if(!has_length($author['Title'], ['min' => 1, 'max' => 255])) {
+        $errors[] = "Title must be between 1 and 255 characters.";
+      }
+
+        // Publication Year
+  // Make sure we are working with an integer
+  $pub_year = (int) $book['PubYear'];
+  if($pub_year <= 1967) {
+    $errors[] = "Publication year must be after 1967.";
+  }
+  if($pub_year > date('Y')) {
+    $errors[] = "Publication year must not be later than current year.";
+  }
+
+    // position
+  // Make sure we are working with an integer
+  $postion_int = (int) $subject['position'];
+  if($postion_int <= 0) {
+    $errors[] = "Position must be greater than zero.";
+  }
+  if($postion_int > 999) {
+    $errors[] = "Position must be less than 999.";
+  }
+
+  // visible
+  // Make sure we are working with a string
+  $visible_str = (string) $subject['visible'];
+  if(!has_inclusion_of($visible_str, ["0","1"])) {
+    $errors[] = "Visible must be true or false.";
+    }
+
     function update_book($book) {
         global $db;
 
@@ -58,6 +102,12 @@
                 echo mysqli_error($db);
                 db_disconnect($db);
         }
+    }
+
+    function validate_book_details($book_details) {
+      $errors = [];
+
+      return $errors;
     }
 
     function update_book_details($book_details) {
@@ -174,6 +224,10 @@
 
         $errors = [];
         
+        if (!preg_match('/^(?=(?:\D*\d){10}(?:(?:\D*\d){3})?$)[\d-]+$/gm', $author['ISBN'])) {
+          $errors[] = "Please enter a valid ISBN";
+      }
+       
         // FirstName
         if(is_blank($author['FirstName'])) {
           $errors[] = "First name cannot be blank.";
@@ -191,7 +245,6 @@
           }
 
         //Gender
-        // Gender
         if(is_blank($author['Gender'])) {
             $errors[] = "Gender cannot be blank.";
           }
@@ -200,30 +253,12 @@
           }
 
           // Nation
-        if(is_blank($author['Gender'])) {
-            $errors[] = "Gender cannot be blank.";
+        if(is_blank($author['Nation'])) {
+            $errors[] = "Nation cannot be blank.";
           }
-          if(!has_length($author['Gender'], ['min' => 2, 'max' => 255])) {
-            $errors[] = "Gender must be between 2 and 255 characters.";
+          if(!has_length($author['Nation'], ['min' => 2, 'max' => 255])) {
+            $errors[] = "Nation must be between 2 and 255 characters.";
           }
-        // position
-        // Make sure we are working with an integer
-        $postion_int = (int) $subject['position'];
-        if($postion_int <= 0) {
-          $errors[] = "Position must be greater than zero.";
-        }
-        if($postion_int > 999) {
-          $errors[] = "Position must be less than 999.";
-        }
-      
-        // visible
-        // Make sure we are working with a string
-        $visible_str = (string) $subject['visible'];
-        if(!has_inclusion_of($visible_str, ["0","1"])) {
-          $errors[] = "Visible must be true or false.";
-        }
-      
-        return $errors;
       }
       
     function update_author($author) {
