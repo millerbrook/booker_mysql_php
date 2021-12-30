@@ -35,50 +35,53 @@
         return $book_details;
     }
 
-    function validate_book($book) {
-      $errors = [];
-      
-      //ISBN
-      if (!preg_match('/^(?=(?:\D*\d){10}(?:(?:\D*\d){3})?$)[\d-]+$/gm', $book['ISBN'])) {
-        $errors[] = "Please enter a valid ISBN";
-    }
-     
-      // Title
-      if(is_blank($book['Title'])) {
-        $errors[] = "Title cannot be blank.";
-      }
-      if(!has_length($author['Title'], ['min' => 1, 'max' => 255])) {
-        $errors[] = "Title must be between 1 and 255 characters.";
-      }
+function validate_book($book){
+  $errors = [];
 
-        // Publication Year
+  //ISBN
+  if (!preg_match('/^(?=(?:\D*\d){10}(?:(?:\D*\d){3})?$)[\d-]+$/gm', $book['ISBN'])) {
+    $errors[] = "Please enter a valid ISBN";
+  }
+
+  // Title
+  if (is_blank($book['Title'])) {
+    $errors[] = "Title cannot be blank.";
+  }
+  if (!has_length($book['Title'], ['min' => 1, 'max' => 255])) {
+    $errors[] = "Title must be between 1 and 255 characters.";
+  }
+
+  // Publication Year
   // Make sure we are working with an integer
   $pub_year = (int) $book['PubYear'];
-  if($pub_year <= 1967) {
+  if ($pub_year <= 1967) {
     $errors[] = "Publication year must be after 1967.";
   }
-  if($pub_year > date('Y')) {
+  if ($pub_year > date('Y')) {
     $errors[] = "Publication year must not be later than current year.";
   }
 
-    // position
-  // Make sure we are working with an integer
-  $postion_int = (int) $subject['position'];
-  if($postion_int <= 0) {
-    $errors[] = "Position must be greater than zero.";
-  }
-  if($postion_int > 999) {
-    $errors[] = "Position must be less than 999.";
-  }
-
-  // visible
-  // Make sure we are working with a string
-  $visible_str = (string) $subject['visible'];
-  if(!has_inclusion_of($visible_str, ["0","1"])) {
-    $errors[] = "Visible must be true or false.";
+    // Author
+    if (is_blank($book['Author'])) {
+      $errors[] = "Author cannot be blank.";
+    }
+    if (!has_length($book['Title'], ['min' => 1, 'max' => 255])) {
+      $errors[] = "Title must be between 1 and 255 characters.";
     }
 
-    function update_book($book) {
+    //Year of Prize Consideration
+      // Publication Year
+  // Make sure we are working with an integer
+  $con_year = (int) $book['ConYear'];
+  if ($con_year <= 1967) {
+    $errors[] = "Year of prize consideration must be after 1967.";
+  }
+  if ($pub_year > date('Y')) {
+    $errors[] = "Year of prize consideration must not be later than current year.";
+  }
+}
+
+  function update_book($book) {
         global $db;
 
         $errors = validate_book($book);
@@ -102,15 +105,98 @@
                 echo mysqli_error($db);
                 db_disconnect($db);
         }
-    }
+  }
 
-    function validate_book_details($book_details) {
+  function validate_book_details($book_details) {
       $errors = [];
+        //ISBN
+      if (!preg_match('/^(?=(?:\D*\d){10}(?:(?:\D*\d){3})?$)[\d-]+$/gm', $book_details['ISBN'])) {
+        $errors[] = "Please enter a valid ISBN";
+      }
 
+      // Title
+      if (is_blank($book_details['Genre1'])) {
+        $errors[] = "Primary genre cannot be blank.";
+      }
+      if (!has_length($book_details['Genre1'], ['min' => 1, 'max' => 255])) {
+        $errors[] = "Primary genre must be between 1 and 255 characters.";
+      }
+        // Historical
+      // Make sure a selection has been made
+      $historical_str = (string) $book_details['Historical'];
+      if(!has_inclusion_of($historical_str, ["0","1"])) {
+        $errors[] = "Historical novel designation must be true or false.";
+      }
+
+      // Number of Journalistic entries prior to nomination
+      // Make sure we are working with a positive integer
+      $journal_before_int = (int) $book_details['NumJournalisticBefore'];
+      if($journal_before_int < 0) {
+        $errors[] = "Value must not be negative.";
+      }
+
+      //Number of Journalistic entries since nomination
+      $journal_after_int = (int) $book_details['NumJournalisticafter'];
+      if($journal_after_int < 0) {
+        $errors[] = "Value must not be negative.";
+      }
+      
+      //Number of Scholarly articles in MLA Bibliography
+      $mla_int = (int) $book_details['NumScholarlyMLA'];
+      if($mla_int < 0) {
+        $errors[] = "Value must not be negative.";
+      }
+
+      //Number of WorldCat library hits
+      $worldcat_int = (int) $book_details['NumLibraryHits'];
+      if($worldcat_int < 0) {
+        $errors[] = "Value must not be negative.";
+      }
+
+      //Is this author's debut novel?
+      $debut_str = (string) $book_details['AuthorsFirstNovel'];
+      if(!has_inclusion_of($debut_str, ["0","1"])) {
+        $errors[] = "Designation must be true or false.";
+      }
+
+      //Is this author's first Booker longlist?
+      $longlist_str = (string) $book_details['AuthorsFirstLonglist'];
+      if(!has_inclusion_of($longlist_str, ["0","1"])) {
+        $errors[] = "Designation must be true or false.";
+      }
+
+      //Has author made a subsequent longlist?
+      $subsequent_str = (string) $book_details['AuthorSubsequentLonglist'];
+      if(!has_inclusion_of($subsequent_str, ["0","1"])) {
+        $errors[] = "Designation must be true or false.";
+      }
+
+      //Did this book make the shortlist?
+      $shortlist_str = (string) $book_details['BookShortlisted'];
+      if(!has_inclusion_of($shortlist_str, ["0","1"])) {
+        $errors[] = "Designation must be true or false.";
+      }
+
+      //Did this book win the Booker Prize?
+      $winner_str = (string) $book_details['BookWinner'];
+      if(!has_inclusion_of($winner_str, ["0","1"])) {
+        $errors[] = "Designation must be true or false.";
+      }
+
+      //Other Awards
+      $other_awards_str = (string) $book_details['BookOtherAwards'];
+      if(!has_inclusion_of($other_awards_str, ["0","1"])) {
+        $errors[] = "Designation must be true or false.";
+      }
+      
+      //Number of pages
+      $number_pages_int = (int) $book_details['PageLength'];
+      if($number_pages_int < 0) {
+          $errors[] = "Value must not be negative.";
+        }
       return $errors;
-    }
-
-    function update_book_details($book_details) {
+}
+function update_book_details($book_details) {
         global $db;
 
         $errors = validate_book_details($book_details);
@@ -259,7 +345,7 @@
           if(!has_length($author['Nation'], ['min' => 2, 'max' => 255])) {
             $errors[] = "Nation must be between 2 and 255 characters.";
           }
-      }
+    }
       
     function update_author($author) {
         global $db;

@@ -93,4 +93,8 @@
     return preg_match($email_regex, $value) === 1;
   }
 
+  function has_valid_isbn_format($value) {
+    $isbn_regex = '/^(?=(?:\D*\d){10}(?:(?:\D*\d){3})?$)[\d-]+$/gm';
+    return preg_match($isbn_regex, $value) === 1;
+  }
 ?>

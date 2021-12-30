@@ -6,3 +6,4 @@
 - radio button only prepopulating for metafiction?
 - change Gender radio to simple text entry -- add autocorrection for case with male and female?
 - super weird db design. need to give authors an id number and add field to identification info as foreign key
+- use ![WorldCat API](https://www.oclc.org/developer/api/oclc-apis/worldcat-search-api.en.html) to iteratively grab numbers of books
