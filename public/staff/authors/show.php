@@ -1,11 +1,11 @@
 <?php require_once('../../../private/initialize.php'); ?>
 
 <?php $page_title = "Single Author Page"; ?>
-<?php include(SHARED_PATH . "staff_header.php"); ?>
+<?php include(SHARED_PATH . "/staff_header.php"); ?>
 
 <?php
 $isbn = $_GET['ISBN'] ?? 'No ISBN Provided'; // PHP > 7.0
-$author = find_author_by_ISBN($isbn);
+$author = find_author_by_ISBN($isbn); // Find the author record
 ?>
 
 <div id='content'>

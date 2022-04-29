@@ -1,6 +1,6 @@
-<?php require_once('../private/initialize.php'); ?>
+<?php require_once('../../private/initialize.php'); ?>
 
-<?php $page_title = 'Staff Menu'; ?>
+<?php $page_title = 'Admin Area'; ?>
 <?php include(SHARED_PATH . '/staff_header.php'); ?>
 
 <div id="content">

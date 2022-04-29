@@ -1,12 +1,12 @@
 <?php
     if(!isset($page_title)) {
-        $page_title = 'Staff Area';
+        $page_title = 'Admin Area';
     }
     ?>
 <!doctype html>
     <html lang="en">
     <head>
-        <title>BookerWatch - <?php echo h($page_title); ?></title>
+        <title>Booker Watch - <?php echo h($page_title); ?></title>
         <meta charset="utf-8">
         <link rel="stylesheet" media="all" href="<?php echo url_for('/stylesheets/staff.css'); ?>" />
     </head>

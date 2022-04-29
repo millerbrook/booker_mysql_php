@@ -1,143 +1,178 @@
 <?php
 
 require_once('../../../private/initialize.php');
-
-if(!isset($_GET['ISBN'])) {
-    redirect_to(url_for('/staff/books/index.php'));
-}
-
-$ISBN = $_GET['ISBN'];
-
 if(is_post_request()) {
+    // Handle form values sent by new.php
+
     $book = [];
-    // Handle form values sent by edit.php below
+    $book['ISBN'] = $_POST['ISBN'] ?? '';
     $book['Title'] = $_POST['Title'] ?? '';
     $book['PubYear'] = $_POST['PubYear'] ?? '';
     $book['Author'] = $_POST['Author'] ?? '';
     $book['Publisher'] = $_POST['Publisher'] ?? '';
     $book['ConYear'] = $_POST['ConYear'] ?? '';
-    $book['ISBN'] = $_POST['ISBN'] ?? '';
-    //$visible = $_POST['visible'] ?? '';
+    $book['Genre1'] = $_POST['Genre1'] ?? '';
+    $book['Genre2'] = $_POST['Genre2'] ?? '';
+    $book['Genre3'] = $_POST['Genre3'] ?? '';
+    $book['Historical'] = $_POST['Historical'] ?? '';
+    $book['NumJournalisticBefore'] = (int) $_POST['NumJournalisticBefore'] ?? NULL;
+    $book['NumJournalisticAfter'] = $_POST['NumJournalisticAfter'] ?? '';
+    $book['NumScholarlyMLA'] = $_POST['NumScholarlyMLA'] ?? '';
+    $book['NumLibraryHits'] = $_POST['NumLibraryHits'] ?? '';
+    $book['AuthorsFirstNovel'] = $_POST['AuthorsFirstNovel'] ?? '';
+    $book['AuthorsFirstLonglist'] = $_POST['AuthorsFirstLonglist'] ?? '';
+    $book['AuthorSubsequentLonglist'] = $_POST['AuthorSubsequentLonglist'] ?? '';
+    $book['BookShortlisted'] = $_POST['BookShortlisted'] ?? '';
+    $book['BookWinner'] = $_POST['BookWinner'] ?? '';
+    $book['BookOtherAwards'] = $_POST['BookOtherAwards'] ?? '';
+    $book['PageLength'] = $_POST['PageLength'] ?? '';
+    $book['PlotInLondon'] = $_POST['PlotInLondon'] ?? '';
+    $book['PlotInEngland'] = $_POST['PlotInEngland'] ?? '';
+    $book['PlotInFrmrColonies'] = $_POST['PlotInFrmrColonies'] ?? '';
+    $book['PlotInIreland'] = $_POST['PlotInIreland'] ?? '';
+    $book['PlotTransnational'] = $_POST['PlotTransnational'] ?? '';
+    $book['PlotWar'] = $_POST['PlotWar'] ?? '';
+    $book['PlotTimespan'] = $_POST['PlotTimespan'] ?? '';
+    $book['PlotEraBegins'] = $_POST['PlotEraBegins'] ?? '';
+    $book['PlotEraEnds'] = $_POST['PlotEraEnds'] ?? '';
+    $book['PlotTimeNonLinear'] = $_POST['PlotTimeNonLinear'] ?? '';
+    $book['PlotTimeProlepsis'] = $_POST['PlotTimeProlepsis'] ?? '';
+    $book['NarratorType'] = $_POST['NarratorType'] ?? '';
+    $book['NarratorTypeTwo'] = $_POST['NarratorTypeTwo'] ?? '';
+    $book['ThemeBildung'] = $_POST['ThemeBildung'] ?? '';
+    $book['ThemeGender'] = $_POST['ThemeGender'] ?? '';
+    $book['ThemeRace'] = $_POST['ThemeRace'] ?? '';
+    $book['ThemeClass'] = $_POST['ThemeClass'] ?? '';
+    $book['ThemeEmpire'] = $_POST['ThemeEmpire'] ?? '';
+    $book['ThemePostcolony'] = $_POST['ThemePostcolony'] ?? '';
+    $book['ProtagonistFemale'] = $_POST['ProtagonistFemale'] ?? '';
+    $book['TechniqueMetafiction'] = $_POST['TechniqueMetafiction'] ?? '';
+    $book['TechniqueOther'] = $_POST['TechniqueOther'] ?? '';
+    $book['Adaptations'] = $_POST['Adaptations'] ?? '';
 
-    $result = update_book($book);
-
-    $book_details = [];
-    $book_details['ISBN'] = $book['ISBN'];
-    $book_details['Genre1'] = $_POST['Genre1'] ?? '';
-    $book_details['Genre2'] = $_POST['Genre2'] ?? '';
-    $book_details['Genre3'] = $_POST['Genre3'] ?? '';
-    $book_details['Historical'] = $_POST['Historical'] ?? '';
-    $book_details['NumJournalisticBefore'] = $_POST['NumJournalisticBefore'] ?? '';
-    $book_details['NumJournalisticAfter'] = $_POST['NumJournalisticAfter'] ?? '';
-    $book_details['NumScholarlyMLA'] = $_POST['NumScholarlyMLA'] ?? '';
-    $book_details['NumLibraryHits'] = $_POST['NumLibraryHits'] ?? '';
-    $book_details['AuthorsFirstNovel'] = $_POST['AuthorsFirstNovel'] ?? '';
-    $book_details['AuthorsFirstLonglist'] = $_POST['AuthorsFirstLonglist'] ?? '';
-    $book_details['AuthorSubsequentLonglist'] = $_POST['AuthorSubsequentLonglist'] ?? '';
-    $book_details['BookShortlisted'] = $_POST['BookShortlisted'] ?? '';
-    $book_details['BookWinner'] = $_POST['BookWinner'] ?? '';
-    $book_details['BookOtherAwards'] = $_POST['BookOtherAwards'] ?? '';
-    $book_details['PageLength'] = $_POST['PageLength'] ?? '';
-    $book_details['PlotInLondon'] = $_POST['PlotInLondon'] ?? '';
-    $book_details['PlotInEngland'] = $_POST['PlotInEngland'] ?? '';
-    $book_details['PlotInFrmrColonies'] = $_POST['PlotInFrmrColonies'] ?? '';
-    $book_details['PlotInIreland'] = $_POST['PlotInIreland'] ?? '';
-    $book_details['PlotTransnational'] = $_POST['PlotTransnational'] ?? '';
-    $book_details['PlotWar'] = $_POST['PlotWar'] ?? '';
-    $book_details['PlotTimespan'] = $_POST['PlotTimespan'] ?? '';
-    $book_details['PlotEraBegins'] = $_POST['PlotEraBegins'] ?? '';
-    $book_details['PlotEraEnd'] = $_POST['PlotEraEnds'] ?? '';
-    $book_details['PlotTimeNonLinear'] = $_POST['PlotTimeNonLinear'] ?? '';
-    $book_details['PlotTimeProlepsis'] = $_POST['PlotTimeProlepsis'] ?? '';
-    $book_details['NarratorType'] = $_POST['NarratorType'] ?? '';
-    $book_details['NarratorTypeTwo'] = $_POST['NarratorTypeTwo'] ?? '';
-    $book_details['ThemeBildung'] = $_POST['ThemeBildung'] ?? '';
-    $book_details['ThemeGender'] = $_POST['ThemeGender'] ?? '';
-    $book_details['ThemeRace'] = $_POST['ThemeRace'] ?? '';
-    $book_details['ThemeClass'] = $_POST['ThemeClass'] ?? '';
-    $book_details['ThemeEmpire'] = $_POST['ThemeEmpire'] ?? '';
-    $book_details['ThemePostcolony'] = $_POST['ThemePostcolony'] ?? '';
-    $book_details['ProtagonistFemale'] = $_POST['ProtagonistFemale'] ?? '';
-    $book_details['TechniqueMetafiction'] = $_POST['TechniqueMetafiction'] ?? '';
-    $book_details['TechniqueOther'] = $_POST['TechniqueOther'] ?? '';
-    $book_details['Adaptations'] = $_POST['Adaptations'] ?? '';
-
-    $result_details = update_book_details($book_details);
-    //redirect_to((url_for('/staff/books/show.php?ISBN=' . $book['ISBN'])));
-} else {
-    $book = find_book_by_ISBN($ISBN);
-    $book_details = find_book_details_by_ISBN($ISBN);
-}
+    $result_book = insert_book($book);
+    if($result_book === true) {
+       redirect_to(url_for('/staff/books/show.php?ISBN=' . $book['ISBN']));
+      } else {
+        $errors = $result_book;
+      }
+    
+    } else {
+        $book = [];
+        $book['ISBN'] = '';
+        $book['Title'] = '';
+        $book['PubYear'] = '';
+        $book['Author'] = '';
+        $book['Publisher'] = '';
+        $book['Genre1'] = '';
+        $book['Genre2'] = '';
+        $book['Genre3'] = '';
+        $book['Historical'] = '';
+        $book['NumJournalisticBefore'] = '';
+        $book['NumJournalisticAfter'] = '';
+        $book['NumScholarlyMLA'] = '';
+        $book['NumLibraryHits'] = '';
+        $book['AuthorsFirstNovel'] = '';
+        $book['AuthorsFirstLonglist'] = '';
+        $book['AuthorSubsequentLonglist'] = '';
+        $book['BookShortlisted'] = '';
+        $book['BookWinner'] = '';
+        $book['BookOtherAwards'] = '';
+        $book['PageLength'] = '';
+        $book['PlotInLondon'] = '';
+        $book['PlotInEngland'] = '';
+        $book['PlotInFrmrColonies'] = '';
+        $book['PlotInIreland'] = '';
+        $book['PlotTransnational'] = '';
+        $book['PlotWar'] = '';
+        $book['PlotTimespan'] = '';
+        $book['PlotEraBegins'] = '';
+        $book['PlotEraEnds'] = '';
+        $book['PlotTimeNonLinear'] = '';
+        $book['PlotTimeProlepsis'] = '';
+        $book['NarratorType'] = '';
+        $book['NarratorTypeTwo'] = '';
+        $book['ThemeBildung'] = '';
+        $book['ThemeGender'] = '';
+        $book['ThemeRace'] = '';
+        $book['ThemeClass'] = '';
+        $book['ThemeEmpire'] = '';
+        $book['ThemePostcolony'] = '';
+        $book['ProtagonistFemale'] = '';
+        $book['TechniqueMetafiction'] = '';
+        $book['TechniqueOther'] = '';
+        $book['Adaptations'] = '';
+    }
 
 ?>
 
-<?php $page_title = 'Edit Book Entry'; ?>
+<?php $page_title = 'Create Book Entry'; ?>
 <?php include(SHARED_PATH . '/staff_header.php'); ?>
 
 <div id="content">
 
     <a class="back-link" href="<?php echo url_for('/staff/books/index.php'); ?>">&laquo; Back to List</a>
 
-    <div class="subject edit">
-        <h1>Edit Book Entry</h1>
+    <div class="subject new">
+        <h1>Create New Book Entry</h1>
 
-        <form action="<?php echo url_for('/staff/books/edit.php?ISBN=' . h(u($book['ISBN']))); ?>" method="post">
-        <!-- DECIDE: MAKE ISBN EDITABLE? IT IS THE PRIMARY KEY -->  
-        <dl>
+        <?php echo display_errors($errors); ?>
+       
+        <form action="<?php echo url_for('/staff/books/new.php'); ?>" method="post">
+            <dl>
                 <dt>ISBN</dt>
-                <dd><input type="text" name="ISBN" value="<?php echo $book['ISBN'];?>" readonly="readonly"/></dd>
+                <dd><input type="text" name="ISBN" /></dd>
             </dl>
             <dl>
                 <dt>Title</dt>
                 <dd>
-                    <input type="text" name="Title" value="<?php echo $book['Title']; ?>" />
+                    <input type="text" name="Title" />
                 </dd>
             </dl>
             <dl>
                 <dt>Publication Year</dt>
                 <dd>
-                    <input type="number" name="PubYear" min="1968" max="<?php echo date('Y'); ?>" value= "<?php echo $book['PubYear']; ?>" step="1"; />
+                    <input type="number" name="PubYear" min="1968" max="<?php echo date('Y'); ?>" step="1" />
                 </dd>
             </dl>
             <dl>
                 <dt>Author</dt>
                 <dd>
-                    <input type="text" name="Author" value="<?php echo $book['Author']; ?>" />
+                    <input type="text" name="Author" />
                 </dd>
             </dl>
             <dl>
                 <dt>Publisher</dt>
                 <dd>
-                    <input type="text" name="Publisher" value="<?php echo $book_details['Publisher'];?>" />
+                    <input type="text" name="Publisher" />
                 </dd>
             </dl>
             <dl>
-                <dt>Year of Consideration for Booker</dt>
+                <dt>Prize Consideration Year</dt>
                 <dd>
-                    <input type="number" name="ConYear" min="1968" max="<?php echo date('Y'); ?>" value= "<?php echo $book['ConYear']; ?>" step="1"; />
+                    <input type="number" name="ConYear" min="1968" max="<?php echo date('Y'); ?>" step="1" />
                 </dd>
             </dl>
             <dl>
-                <dt>Primary Genre</dt>
+                <dt>Genre</dt>
                 <dd>
-                    <input type="text" name="Genre" value="<?php echo $book_details['Genre'];?>" />
+                    <input type="text" name="Genre1" />
                 </dd>
             </dl>
             <dl>
                 <dt>Genre Categorization 2</dt>
                 <dd>
-                    <input type="text" name="Genre2" value="<?php echo $book_details['Genre2'];?>" />
+                    <input type="text" name="Genre2" />
                 </dd>
             </dl>
             <dl>
                 <dt>Genre Categorization 3</dt>
                 <dd>
-                    <input type="text" name="Genre3" value="<?php echo $book_details['Genre3'];?>" />
+                    <input type="text" name="Genre3" />
                 </dd>
             </dl>
             <dl>
                 <dt>Is this a historical novel?</dt>
-                <!-- //how do I handle radio buttons with prepopulation? -->
                 <dd>
                     <input type="radio" name="Historical" value="1">Yes</input>
                     <input type="radio" name="Historical" value="0">No</input>
@@ -146,25 +181,25 @@ if(is_post_request()) {
             <dl>
                 <dt>Number of Journalistic Entries Before Booker Nomination</dt>
                 <dd>
-                    <input type="number" step="1" name="NumJournalisticBefore" value="<?php echo $book_details['NumJournalisticBefore'];?>" />
+                    <input name="NumJournalisticBefore"/>
                 </dd>
             </dl>
             <dl>
                 <dt>Number of Journalistic Entries Since the Booker Nomination</dt>
                 <dd>
-                    <input type="number" step="1" name="NumJournalisticAfter" value="<?php echo $book_details['NumJournalisticAfter'];?>" />
+                    <input type="text" name="NumJournalisticAfter"/>
                 </dd>
             </dl>
             <dl>
                 <dt>Number of Scholarly Entries that Reference Book in MLA Bibliography</dt>
                 <dd>
-                    <input type="number" step="1" name="NumScholarlyMLA" value="<?php echo $book_details['NumScholarlyMLA'];?>" />
+                    <input type="text" name="NumScholarlyMLA"/>
                 </dd>
             </dl>
             <dl>
                 <dt>Number of Library Hits according to WorldCat</dt>
                 <dd>
-                    <input type="number" step="1" name="NumLibraryHits" value="<?php echo $book_details['NumLibraryHits'];?>" />
+                    <input type="text" name="NumLibraryHits"/>
                 </dd>
             </dl>
             <dl>
@@ -212,7 +247,7 @@ if(is_post_request()) {
             <dl>
                 <dt>Number of Pages</dt>
                 <dd>
-                    <input type="number" step="1" name="PageLength" value="<?php echo $book_details['PageLength'];?>" />
+                    <input type="text" name="PageLength" value="NULL" />
                 </dd>
             </dl>
             <dl>
@@ -260,23 +295,23 @@ if(is_post_request()) {
             <dl>
                 <dt>Plot timespan in years</dt>
                 <dd>
-                    <input type="number" step="1" name="PlotTimespan" value="<?php echo $book_details['PlotTimespan'];?>" />
+                    <input type="text" name="PlotTimespan" value="NULL" />
                 </dd>
             </dl>
             <dl>
                 <dt>Plot era begins (year)</dt>
                 <dd>
-                    <input type="number" step="1" name="PlotEraBegins" value="<?php echo $book_details['PlotEraBegins'];?>" />
+                    <input type="text" name="PlotEraBegins" value="NULL" />
                 </dd>
             </dl>
             <dl>
                 <dt>Plot era ends</dt>
                 <dd>
-                    <input type="number" step="1" name="PlotEraEnds" value="<?php echo $book_details['PlotEraEnds'];?>" />
+                    <input type="text" name="PlotEraEnds" value="NULL" />
                 </dd>
             </dl>
             <dl>
-                <dt>Does the plot involve non-chronological plotting (YES if it is non-linear timewise)?</dt>
+                <dt>Does the plot involve non-linear plotting? (YES if it is non-linear timewise)</dt>
                 <dd>
                     <input type="radio" name="PlotTimeNonLinear" value="1">Yes</input>
                     <input type="radio" name="PlotTimeNonLinear" value="0">No</input>
@@ -292,13 +327,13 @@ if(is_post_request()) {
             <dl>
                 <dt>Narrator Type (Primary)</dt>
                 <dd>
-                    <input type="text" name="NarratorType" value="<?php echo $book_details['NarratorType'];?>" />
+                    <input type="text" name="NarratorType" />
                 </dd>
             </dl>
             <dl>
                 <dt>Narrator Type (Secondary)</dt>
                 <dd>
-                    <input type="text" name="NarratorTypeTwo" value="<?php echo $book_details['NarratorTypeTwo'];?>" />
+                    <input type="text" name="NarratorTypeTwo" />
                 </dd>
             </dl>
             <dl>
@@ -353,31 +388,25 @@ if(is_post_request()) {
             <dl>
                 <dt>Is metafiction a significant technique?</dt>
                 <dd>
-                    <input type="radio" name="TechniqueMetafiction" value="1" <?php echo ($book_details['TechniqueMetafiction']=='1')?'checked':'' ?>>Yes</input>
-                    <input type="radio" name="TechniqueMetafiction" value="0" <?php echo ($book_details['TechniqueMetafiction']=='0')?'checked':'' ?>>No</input>
+                    <input type="radio" name="TechniqueMetafiction" value="1">Yes</input>
+                    <input type="radio" name="TechniqueMetafiction" value="0">No</input>
                 </dd>
             </dl>
             <dl>
                 <dt>What other key formal techniques are employed?</dt>
                 <dd>
-                    <input type="text" name="TechniqueOther" value="<?php echo $book_details['TechniqueOther'];?>" />
+                    <input type="text" name="TechniqueOther" />
                 </dd>
             </dl>
             <dl>
                 <dt>List any adaptations (film or otherwise), separated by commas</dt>
                 <dd>
-                    <input type="text" name="Adaptations" value="<?php echo $book_details['Adaptations'];?>" />
+                    <input type="text" name="Adaptations" />
                 </dd>
             </dl>
-            <!-- <dl>
-                <dt>Visible</dt>
-                <dd>
-                    <input type="hidden" name="visible" value="0" />
-                    <input type="checkbox" name="visible" value="1" <?php if($visible=="1") { echo " checked";} ?>/>
-                </dd>
-            </dl> -->
+
             <div id="operations">
-                <input type="submit" value="Edit Book Entry" />
+                <input type="submit" value="Create New Book Entry" />
             </div>
         </form>
 
@@ -386,3 +415,4 @@ if(is_post_request()) {
 </div>
 
 <?php include(SHARED_PATH . '/staff_footer.php'); ?>
+<!-- <?php //Deleted } to close else clause from above (all form stuff is in 'else' clause) ?>  -->

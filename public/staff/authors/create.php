@@ -16,11 +16,11 @@ if(is_post_request()) {
     $sql = "INSERT INTO authorinfo ";
     $sql .= "(ISBN, FirstName, LastName, Gender, Nation) ";
     $sql .= "VALUES (";
-    $sql .= "'" . $ISBN . "', ";
-    $sql .= "'" . $FirstName . "', ";
-    $sql .= "'" . $LastName . "', ";
-    $sql .= "'" . $Gender . "', ";
-    $sql .= "'" . $Nation . "'";
+    $sql .= "'" . db_escape($db, $ISBN) . "', ";
+    $sql .= "'" . db_escape($db, $FirstName) . "', ";
+    $sql .= "'" . db_escape($db, $LastName) . "', ";
+    $sql .= "'" . db_escape($db, $Gender) . "', ";
+    $sql .= "'" . db_escape($db, $Nation) . "'";
     $sql .= ")";
     $result = mysqli_query($db, $sql);
     if($result) {

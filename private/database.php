@@ -13,7 +13,11 @@
       mysqli_close($connection);
     }
   }
-
+  
+  function db_escape($connection, $string) {
+    return mysqli_real_escape_string($connection, $string);
+  }
+  
   function confirm_db_connect() {
     if(mysqli_connect_error()){
       $msg = "Database connection failed: ";

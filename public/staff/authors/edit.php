@@ -6,7 +6,6 @@ if(!isset($_GET['ISBN'])) {
     redirect_to(url_for('/staff/authors/index.php'));
 }
 
-
 $ISBN = $_GET['ISBN'];
 
 if(is_post_request()) {
@@ -38,6 +37,8 @@ if(is_post_request()) {
     <div class="subject new">
         <h1>Edit Author Entry</h1>
 
+        <?php echo display_errors($errors); ?>
+        
         <form action="<?php echo url_for('/staff/authors/edit.php?ISBN=' . h(u($ISBN))); ?>" method="post">
             <!-- DECIDE: MAKE ISBN EDITABLE? IT IS THE PRIMARY KEY -->
             <dl>

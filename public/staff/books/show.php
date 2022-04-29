@@ -1,15 +1,24 @@
 <?php require_once('../../../private/initialize.php'); ?>
 
 <?php $page_title = "Single Book Page"; ?>
-<?php include(SHARED_PATH . "staff_header.php"); ?>
+<?php include(SHARED_PATH . "/staff_header.php"); ?>
 <?php
 $isbn = $_GET['ISBN'] ?? 'No ISBN Provided'; // PHP > 7.0
 $book = find_book_by_ISBN($isbn);
 $book_details = find_book_details_by_ISBN($isbn);
+$author = find_author_by_ISBN($isbn);
+if(!$author) {
+    $message = '<div>There is no author associated with this ISBN. Check <a href = ' . url_for("/staff/authors/index.php") . ">here</a> to search for this author under a different ISBN or create a new author record.</div>";
+}else {
+    $message = "<div>This ISBN is associated with an author.</div>";
+}
 ?>
 <div id='content'>
     <a class="back-link" href="<?php echo url_for('/staff/books/index.php'); ?>">&laquo; Back to List</a>
     <div class="attributes">
+        <br /><br />
+        <?php echo $message ?>
+        <br /><br />
         <table>
             <dl>
                 <dt>ISBN</dt>

@@ -2,27 +2,32 @@
 //PROBLEM LIST: 1. dates not working; 
 require_once('../../../private/initialize.php');
 
-// if(is_post_request()) {
+if(is_post_request()) {
 
-//     // Handle form values sent by new.php
-//     $formattedBirthdate = strtotime($_POST['Birthdate']);
-//     $ISBN = $_POST['ISBN'] ?? '';
-//     $FirstName = $_POST['FirstName'] ?? '';
-//     $LastName = $_POST['LastName'] ?? '';
-//     $Gender = $_POST['Gender'] ?? '';
-//     $Nation = $_POST['Nation'] ?? '';
-//     $Birthdate = date('d-m-Y', $formattedBirthdate) ?? ''; //doesn't work
-//     $visible = $_POST['visible'] ?? '';
-
-//     echo "Form parameters<br />";
-//     echo "ISBN: " . $ISBN . "<br />";
-//     echo "Name: " . $FirstName . " " . $LastName . "<br />";
-//     echo "Gender: " . $Gender . "<br />";
-//     echo "Nation: " . $Nation . "<br />";
-//     echo "Birth Date: " . $Birthdate . "<br />"; //Problem here -- doesn't print date
-//     echo "Visible: " . $visible . "<br />";
-
-// } else {
+    // Handle form values sent by new.php
+    $author = [];
+    $author['ISBN'] = $_POST['ISBN'] ?? '';
+    $author['FirstName'] = $_POST['FirstName'] ?? '';
+    $author['LastName'] = $_POST['LastName'] ?? '';
+    $author['Gender'] = $_POST['Gender'] ?? '';
+    $author['Nation'] = $_POST['Nation'] ?? '';
+    //$Birthdate = $_POST['Birthdate'] ?? '';
+    //$visible = $_POST['visible'] ?? '';
+    $result_author = insert_author($author);
+    if($result_author === true) {
+        redirect_to(url_for('/staff/authors/show.php?ISBN=' . $author['ISBN']));
+    } else {
+        $errors = $result_author;
+      }
+    } else {
+        $author = [];
+        $author['ISBN'] = '';
+        $author['FirstName'] = '';
+        $author['LastName'] = '';
+        $author['Gender'] = '';
+        $author['Nation'] = '';
+    }
+   
 ?>
 
 <?php $page_title = 'Create Author Entry'; ?>
@@ -33,9 +38,11 @@ require_once('../../../private/initialize.php');
     <a class="back-link" href="<?php echo url_for('/staff/authors/index.php'); ?>">&laquo; Back to List</a>
 
     <div class="subject new">
-        <h1>Create New Author Entry</h1>
+        <h1>Create NEW Author Entry</h1>
 
-        <form action="<?php echo url_for('/staff/authors/create.php'); ?>" method="post">
+        <?php echo display_errors($errors); ?>
+
+        <form action="<?php echo url_for('/staff/authors/new.php'); ?>" method="post">
             <dl>
                 <dt>Associated ISBN</dt>
                 <dd><input type="text" name="ISBN" value="" /></dd>

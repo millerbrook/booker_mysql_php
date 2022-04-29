@@ -4,7 +4,7 @@
 $book_set = find_all_books();
 
 ?>
-<?php $page_title = 'Staff Menu'; ?>
+<?php $page_title = 'Admin Area'; ?>
 <?php include(SHARED_PATH . '/staff_header.php'); ?>
 
 <div id="content">
