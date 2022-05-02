@@ -33,7 +33,12 @@ header {
 
 header h1 {
   padding: 1em;
-  margin: 0;
+  display: flex;
+  align-items: center;
+}
+
+header h1 p {
+  padding-left: 10em;
 }
 
 #main {
@@ -84,22 +89,15 @@ a:hover {
   text-decoration: underline
 }
 
-ul.subjects {
+ul {
   margin-top: 20px;
   margin-left: 20px;
   padding: 0;
   list-style: none;
 }
 
-ul.subjects > li {
+ul > li {
   margin-bottom: 1em;
-}
-
-ul.pages {
-  margin-left: 15px;
-  padding: 0;
-  list-style: none;
-  font-weight: normal;
 }
 
 .selected > a {
@@ -145,7 +143,8 @@ navigation li {
 }
 
 #page p {
-  font-family: "Gill Sans", "Gill Sans MT", "Myriad Pro", "DejaVu Sans Condensed", Helvetica, Arial, "sans-serif" font-size: 12px;
+  font-family: "Gill Sans", "Gill Sans MT", "Myriad Pro", "DejaVu Sans Condensed", Helvetica, Arial, "sans-serif";
+  font-size: medium;
   color: #000000;
   padding: 0px;
   line-height: normal;
@@ -203,4 +202,25 @@ a.learnmore {
 
 a.learnmore:hover {
   text-decoration: underline
+}
+
+/* Table decoration */
+table {
+  border-collapse: collapse;
+  vertical-align: top;
+}
+
+table {
+  width: 100%;
+}
+
+table tr td {
+  border: 1px solid #999999;
+}
+
+table tr th {
+  border: 1px solid #e03e52;
+  background: #786758;
+  color: white;
+  text-align: left;
 }

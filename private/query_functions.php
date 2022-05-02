@@ -8,7 +8,24 @@ function find_all_books() {
         confirm_result_set($result);
         return $result;
     }
-
+function find_books_by_theme($theme) {
+      global $db;
+      $full_theme='';
+      if($theme == 'Post-coloniality') {
+        $full_theme = 'ThemePostColony';
+      } elseif($theme == 'War') {
+        $full_theme = 'PlotWar';
+      } else {
+        $full_theme = 'Theme' . $theme;
+      }
+      $sql = "SELECT * FROM identificationinfo ";
+      $sql .= "LEFT JOIN bookinfo ON identificationinfo.ISBN = bookinfo.ISBN ";
+      $sql .= "WHERE " . $full_theme . " = 1 ";
+      $sql .= "ORDER BY PubYear DESC";
+      $result = mysqli_query($db, $sql);
+      confirm_result_set($result);
+      return $result;
+  }
 function find_book_by_ISBN($ISBN) {
         global $db;
 

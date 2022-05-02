@@ -1,34 +1,35 @@
 <?php
+  //array of main menu items
+  $main_nav_items = ['Sandboxes'=>array('Timelines', 'Locations', 'Animations', 'Variable Correlations'), 'Themes'=>array('War', 'Bildung', 'Race', 'Class', 'Gender', 'Empire', 'Post-coloniality') , 'Formal Features'=>array('Genre', 'Metafiction', 'Temporal Structure', 'Book Length'), 'Location'=>array('London', 'England', 'Colonies', 'Ireland', 'Transnational'), 'Authors'=>array('Gender', 'Nation', 'Age', 'Debut', 'Subsequent Work'), 'Reception'=>array('Journalistic', 'Scholarly', 'Popularity', 'Adaptation', 'Booker Success', 'Other Awards'), 'Years'=>array('Individual', 'By Range'), 'Auditing & Feedback'=>array('Single Book', 'Single Author'), 'Sample Scholarship'=>array('Single Author', 'Thematic', 'Canonicity'), 'Resources'=>array('Prize Culture Bibliography', 'Booker Prize Bibliography', 'Scholarship with Digital Resources Bibliography')];
   // Default values to prevent errors
   $page_id = $page_id ?? '';
   $subject_id = $subject_id ?? '';
+  if (isset($_GET['subject_id'])) {
+    $subject_id = $_GET['subject_id'];
+  }
 ?>
 
 <navigation>
-  <?php $nav_books = find_all_books(); ?>
-  <ul class="books"> <!--note this class was 'subjects' -- change in css -->
-    <?php while($nav_book = mysqli_fetch_assoc($nav_books)) { ?>
-      <li class="<?php if($nav_subject['id'] == $subject_id) { echo 'selected'; } ?>">
-        <a href="<?php echo url_for('index.php?subject_id=' . h(u($nav_subject['id']))); ?>">
-          <?php echo h($nav_subject['menu_name']); ?>
+  
+  <ul class="main_nav_items"> <!--note this class was 'subjects' -- change in css -->
+    <?php foreach ($main_nav_items as $main_nav_item=> $sub_items) { ?>
+      <li class="<?php if($main_nav_item == $subject_id) { echo 'selected'; } ?>">
+        <a href="<?php echo url_for('index.php?subject_id=' . h(u($main_nav_item)) . '&' . 'category_id=' . h(u($main_nav_item))); ?>">
+          <?php echo h($main_nav_item); ?>
         </a>
 
-        <?php if($nav_subject['id'] == $subject_id) { ?>
-          <?php $nav_pages = find_pages_by_subject_id($nav_subject['id']); ?>
-          <ul class="pages">
-            <?php while($nav_page = mysqli_fetch_assoc($nav_pages)) { ?>
-              <li class="<?php if($nav_page['id'] == $page_id) { echo 'selected'; } ?>">
-                <a href="<?php echo url_for('index.php?id=' . h(u($nav_page['id']))); ?>">
-                  <?php echo h($nav_page['menu_name']); ?>
+        <?php if($main_nav_item == $subject_id) { ?>
+          <ul class="sub_items">
+            <?php foreach ($sub_items as $sub_item) {?>
+              <li class="<?php if($sub_item == $subject_id) { echo 'selected'; } ?>">
+                <a href="<?php echo url_for('index.php?subject_id=' . h(u($sub_item)) . '&' . 'category_id=' . h(u($main_nav_item))); ?>">
+                    <?php echo h($sub_item); ?>
                 </a>
               </li>
-            <?php } // while $nav_pages ?>
+              <?php } // while $sub_items ?>
           </ul>
-          <?php mysqli_free_result($nav_pages); ?>
-        <?php } // if($nav_subject['id'] == $subject_id) ?>
-
+          <?php } // end if clause to trigger $sub_item menu ?>
       </li>
-    <?php } // while $nav_subjects ?>
+    <?php } // foreach main_nav_items  ?>
   </ul>
-  <?php mysqli_free_result($nav_subjects); ?>
 </navigation>

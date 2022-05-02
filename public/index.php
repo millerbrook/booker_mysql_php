@@ -1,19 +1,14 @@
 <?php require_once('../private/initialize.php'); ?>
-
 <?php include(SHARED_PATH . '/public_header.php'); ?>
 
 <div id="main">
-
   <?php include(SHARED_PATH . '/public_navigation.php'); ?>
-
   <div id="page">
-
-    <?php
-      if(isset($page)) {
+    <?php 
+      if(($_GET['category_id'] === 'Themes') && ($_GET['subject_id'] !== 'Themes')) {
         // show the page from the database
         // TODO add html escaping back in
-        echo $page['content'];
-
+        include(SHARED_PATH . '/dynamic_homepage.php');
       } else {
         // Show the homepage
         // The homepage content could:
@@ -23,9 +18,6 @@
         include(SHARED_PATH . '/static_homepage.php');
       }
     ?>
-
   </div>
-
 </div>
-
 <?php include(SHARED_PATH . '/public_footer.php'); ?>
