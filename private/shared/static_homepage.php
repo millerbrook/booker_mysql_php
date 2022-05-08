@@ -1,0 +1,1 @@
+<h1> ON STATIC HOME PAGE NO PHP </h1>

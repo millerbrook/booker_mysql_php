@@ -4,6 +4,12 @@
   #f07b27 - orange
   #786758 - brown
 */
+/* Alternative to try based on E03E52:
+#E03E52
+#798897
+#F3EED9
+#E29897
+*/
 
 html {
   height: 100%;
@@ -47,7 +53,7 @@ header h1 p {
   min-height: 800px;
   margin: 0;
   padding: 0;
-  background: #c8ced2;
+  background: #F3EED9;
 }
 
 footer {
@@ -67,11 +73,11 @@ navigation {
   float: left;
   width: 200px;
   height: 100%;
-  background: #7a6855;
+  background: #F3EED9;
 }
 
 navigation a {
-  color: #FFFFFF;
+  color: #798897;
   text-decoration: none;
 }
 

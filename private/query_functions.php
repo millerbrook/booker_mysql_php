@@ -26,6 +26,34 @@ function find_books_by_theme($theme) {
       confirm_result_set($result);
       return $result;
   }
+  function find_books_by_location($location) {
+    global $db;
+    $full_location='';
+    if($location == 'Colonies') {
+      $full_location = 'PlotInFrmrColonies';
+    } elseif($location == 'Transnational') {
+      $full_location = 'PlotTransnational';
+    } else {
+      $full_location = 'PlotInLondon';
+    }
+    $sql = "SELECT * FROM identificationinfo ";
+    $sql .= "LEFT JOIN bookinfo ON identificationinfo.ISBN = bookinfo.ISBN ";
+    $sql .= "WHERE " . $full_location . " = 1 ";
+    $sql .= "ORDER BY PubYear DESC";
+    $result = mysqli_query($db, $sql);
+    confirm_result_set($result);
+    return $result;
+}
+function find_books_by_prize_year($con_year) {
+  global $db;
+  $sql = "SELECT * FROM identificationinfo ";
+  $sql .= "LEFT JOIN bookinfo ON identificationinfo.ISBN = bookinfo.ISBN ";
+  $sql .= "WHERE ConYear= " . $con_year . " ";
+  $sql .= "ORDER BY PubYear DESC";
+  $result = mysqli_query($db, $sql);
+  confirm_result_set($result);
+  return $result;
+}
 function find_book_by_ISBN($ISBN) {
         global $db;
 

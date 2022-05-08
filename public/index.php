@@ -5,9 +5,10 @@
   <?php include(SHARED_PATH . '/public_navigation.php'); ?>
   <div id="page">
     <?php 
-      if(($_GET['category_id'] === 'Themes') && ($_GET['subject_id'] !== 'Themes')) {
+      if((null != $category_id) && ($subject_id != $category_id)) {
         // show the page from the database
         // TODO add html escaping back in
+        //include(SHARED_PATH . '/dynamic_homepage.php');
         include(SHARED_PATH . '/dynamic_homepage.php');
       } else {
         // Show the homepage
