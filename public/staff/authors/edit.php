@@ -20,6 +20,7 @@ if(is_post_request()) {
     //$visible = $_POST['visible'] ?? '';
    
     $result = update_author($author);
+    $_SESSION['message'] = 'The author entry was updated successfully.';
     redirect_to((url_for('/staff/authors/show.php?ISBN=' . $author['ISBN'])));
 
 } else {

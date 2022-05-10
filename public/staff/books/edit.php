@@ -64,6 +64,7 @@ if(is_post_request()) {
     $result = update_book($book);
     //redirect_to((url_for('/staff/books/show.php?ISBN=' . $book['ISBN'])));
     if($result === true){
+        $_SESSION['message'] = 'The book entry was updated successfully.';
         redirect_to((url_for('/staff/books/show.php?ISBN=' . $book['ISBN'])));
     } else {
         $errors = $result;

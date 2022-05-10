@@ -52,6 +52,7 @@ if(is_post_request()) {
 
     $result_book = insert_book($book);
     if($result_book === true) {
+        $_SESSION['message'] = 'The book entry was added successfully.';
        redirect_to(url_for('/staff/books/show.php?ISBN=' . $book['ISBN']));
       } else {
         $errors = $result_book;

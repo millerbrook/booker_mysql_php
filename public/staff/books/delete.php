@@ -10,6 +10,7 @@ $ISBN = $_GET['ISBN'];
 if(is_post_request()) { //this is key -- different between going to the page the first time and second time (after form submit)
 
   $result = delete_book_by_ISBN($ISBN);
+  $_SESSION['message'] = 'The book entry was deleted successfully.';
   redirect_to(url_for('/staff/books/index.php'));
 
 } else {

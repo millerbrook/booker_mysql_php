@@ -1,5 +1,5 @@
 <?php
-//PROBLEM LIST: 1. dates not working; 
+
 require_once('../../../private/initialize.php');
 
 if(is_post_request()) {
@@ -15,6 +15,7 @@ if(is_post_request()) {
     //$visible = $_POST['visible'] ?? '';
     $result_author = insert_author($author);
     if($result_author === true) {
+        $_SESSION['message'] = 'The author entry was added successfully.';
         redirect_to(url_for('/staff/authors/show.php?ISBN=' . $author['ISBN']));
     } else {
         $errors = $result_author;
