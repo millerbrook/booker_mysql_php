@@ -82,6 +82,24 @@
     return strpos($value, $required_string) !== false;
   }
 
+  // has_unique_username('johnqpublic')
+  // * Validates uniqueness of admins.username
+  // * For new records, provide only the username.
+  // * For existing records, provide current ID as second argument
+  //   has_unique_username('johnqpublic', 4)
+  function has_unique_username($username, $current_id="0") {
+    global $db;
+
+    $sql = "SELECT * FROM admins ";
+    $sql .= "WHERE username='" . db_escape($db, $username) . "' ";
+    $sql .= "AND id != '" . db_escape($db, $current_id) . "'";
+
+    $result = mysqli_query($db, $sql);
+    $admin_count = mysqli_num_rows($result);
+    mysqli_free_result($result);
+
+    return $admin_count === 0;
+  }
   // has_valid_email_format('nobody@nowhere.com')
   // * validate correct format for email addresses
   // * format: [chars]@[chars].[2+ letters]
@@ -93,6 +111,9 @@
     return preg_match($email_regex, $value) === 1;
   }
 
+  // has_valid_isbn_format
+  // * source?
+  // * check whether this is functioning properly
   function has_valid_isbn_format($value) {
     $isbn_regex = '/^(?=(?:\D*\d){10}(?:(?:\D*\d){3})?$)[\d-]+$/gm';
     return preg_match($isbn_regex, $value) === 1;

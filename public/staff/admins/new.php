@@ -6,32 +6,34 @@ if(is_post_request()) {
 
     // Handle form values sent by new.php
     $admin = [];
-    $admin['ISBN'] = $_POST['ISBN'] ?? '';
-    $admin['FirstName'] = $_POST['FirstName'] ?? '';
-    $admin['LastName'] = $_POST['LastName'] ?? '';
-    $admin['Gender'] = $_POST['Gender'] ?? '';
-    $admin['Nation'] = $_POST['Nation'] ?? '';
-    //$Birthdate = $_POST['Birthdate'] ?? '';
-    //$visible = $_POST['visible'] ?? '';
+    $admin['id'] = $_POST['id'] ?? '';
+    $admin['first_name'] = $_POST['first_name'] ?? '';
+    $admin['last_name'] = $_POST['last_name'] ?? '';
+    $admin['username'] = $_POST['username'] ?? '';
+    $admin['email'] = $_POST['email'] ?? '';
+    $admin['password'] = $_POST['password'] ?? '';
+    $admin['confirm_password'] = $_POST['confirm_password'] ?? '';
     $result_admin = insert_admin($admin);
     if($result_admin === true) {
         $_SESSION['message'] = 'The admin entry was added successfully.';
-        redirect_to(url_for('/staff/admins/show.php?ISBN=' . $admin['ISBN']));
+        redirect_to(url_for('/staff/admins/show.php?username=' . $admin['username']));
     } else {
         $errors = $result_admin;
       }
     } else {
         $admin = [];
-        $admin['ISBN'] = '';
-        $admin['FirstName'] = '';
-        $admin['LastName'] = '';
-        $admin['Gender'] = '';
-        $admin['Nation'] = '';
+        $admin['id'] = '';
+        $admin['first_name'] = '';
+        $admin['last_name'] = '';
+        $admin['email'] = '';
+        $admin['username'] = '';
+        $admin['password'] = '';
+        $admin['confirm_password'] = '';
     }
    
 ?>
 
-<?php $page_title = 'Create admin Entry'; ?>
+<?php $page_title = 'Create Admin Entry'; ?>
 <?php include(SHARED_PATH . '/staff_header.php'); ?>
 
 <div id="content">
@@ -39,41 +41,50 @@ if(is_post_request()) {
     <a class="back-link" href="<?php echo url_for('/staff/admins/index.php'); ?>">&laquo; Back to List</a>
 
     <div class="subject new">
-        <h1>Create NEW admin Entry</h1>
+        <h1>Create New Admin Entry</h1>
 
         <?php echo display_errors($errors); ?>
 
         <form action="<?php echo url_for('/staff/admins/new.php'); ?>" method="post">
             <dl>
-                <dt>Associated ISBN</dt>
-                <dd><input type="text" name="ISBN" value="" /></dd>
-            </dl>
-            <dl>
                 <dt>First Name</dt>
                 <dd>
-                    <input type="text" name="FirstName" value="" />
+                    <input type="text" name="first_name" value="" />
                 </dd>
             </dl>
             <dl>
                 <dt>Last Name</dt>
                 <dd>
-                    <input type="text" name="LastName" value="" />
+                    <input type="text" name="last_name" value="" />
                 </dd>
             </dl>
             <dl>
-                <dt>Gender</dt>
+                <dt>Email</dt>
                 <dd>
-                    <input type="text" name="Gender" value="" />
+                    <input type="text" name="email" value="" />
                 </dd>
             </dl>
             <dl>
-                <dt>Nation</dt>
+                <dt>Username</dt>
                 <dd>
-                    <input type="text" name="Nation" value="" />
+                    <input type="text" name="username" value="" />
                 </dd>
             </dl>
+            <dl>
+                <dt>Password</dt>
+                <dd>
+                    <input type="password" name="password" value="" />
+                </dd>
+            </dl>
+            <dl>
+                <dt>Confirm Password</dt>
+                <dd>
+                    <input type="password" name="confirm_password" value="" />
+                </dd>
+            </dl>
+            <p>Password should be at least 12 characters long and include at least 1 uppercase letter, 1 lowercase letter, and 1 symbol</p>
             <div id="operations">
-                <input type="submit" value="Create admin Entry" />
+                <input type="submit" value="Create Admin Entry" />
             </div>
         </form>
 
@@ -81,4 +92,3 @@ if(is_post_request()) {
 
 </div>
 <?php include(SHARED_PATH . '/staff_footer.php'); ?>
-<?php //Deleted { to Close else clause from above (all form stuff is in 'else' clause) ?> 

@@ -2,19 +2,19 @@
 
 require_once('../../../private/initialize.php');
 
-if(!isset($_GET['ISBN'])) {
-    redirect_to(url_for('/staff/authors/index.php'));
+if(!isset($_GET['id'])) {
+    redirect_to(url_for('/staff/admins/index.php'));
 }
-$ISBN = $_GET['ISBN'];
+$id = $_GET['id'];
 
 if(is_post_request()) {
 
-  $result = delete_author_by_ISBN($ISBN);
-  $_SESSION['message'] = 'The author entry was deleted successfully.';
-  redirect_to(url_for('/staff/authors/index.php'));
+  $result = delete_admin_by_id($id);
+  $_SESSION['message'] = 'The admin entry was deleted successfully.';
+  redirect_to(url_for('/staff/admins/index.php'));
 
 } else {
-  $author = find_author_by_ISBN($ISBN);
+  $admin = find_admin_by_id($id);
 }
 
 ?>

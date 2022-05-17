@@ -2,8 +2,8 @@
 
 <?php
 $admin_set = find_all_admins();
-
 ?>
+
 <?php $page_title = 'Admins'; ?>
 <?php include(SHARED_PATH . '/staff_header.php'); ?>
 
@@ -12,7 +12,7 @@ $admin_set = find_all_admins();
         <h1>Admins</h1>
 
         <div class="actions">
-            <a class="action" href="<?php echo url_for('/staff/admins/new.php')?>" >Create New Author Entry</a>
+            <a class="action" href="<?php echo url_for('/staff/admins/new.php')?>" >Create New Admin Entry</a>
         </div>
 
         <table class="list">
